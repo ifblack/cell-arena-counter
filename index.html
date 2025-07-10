@@ -5,9 +5,59 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cell Arena ATP Counter</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f0f2f5; text-align: center; padding: 20px; }
+    h1 { color: #1a237e; }
+    .counter { font-size: 24px; margin: 20px 0; }
+    .btn { font-size: 20px; padding: 10px 20px; margin: 5px; border-radius: 10px; border: none; }
+    .btn-green { background: #4CAF50; color: white; }
+    .btn-red { background: #f44336; color: white; }
+  </style>
 </head>
 <body>
-  <h1>Cell Arena ATP Counter</h1>
-  <p>This is a placeholder version. Please replace with full HTML content.</p>
+  <h1>🏆 Cell Arena ATP Counter</h1>
+  <div class="counter">Turn: <span id="turn">1</span></div>
+  <button class="btn btn-green" onclick="nextTurn()">Next</button>
+  <div class="counter">☀️ Day / 🌙 Night: <span id="dayNight">Day</span></div>
+  <button class="btn" onclick="toggleDayNight()">Switch</button>
+  <br><br>
+  <div class="counter">ATP: <span id="atp">20</span> | Glucose: <span id="glu">0</span></div>
+  <button class="btn" onclick="adjustATP(1)">ATP +1</button>
+  <button class="btn" onclick="adjustATP(-1)">ATP -1</button>
+  <button class="btn" onclick="adjustGlu(1)">Glu +1</button>
+  <button class="btn" onclick="adjustGlu(-1)">Glu -1</button>
+  <br><br>
+  <button class="btn btn-red" onclick="reset()">Reset</button>
+  <script>
+    let turn = 1, isDay = true, atp = 20, glu = 0;
+    function update() {
+      document.getElementById("turn").innerText = turn;
+      document.getElementById("dayNight").innerText = isDay ? "Day" : "Night";
+      document.getElementById("atp").innerText = atp;
+      document.getElementById("glu").innerText = glu;
+    }
+    function nextTurn() {
+      turn += 1;
+      isDay = true;
+      update();
+    }
+    function toggleDayNight() {
+      isDay = !isDay;
+      update();
+    }
+    function adjustATP(val) {
+      atp = Math.max(0, atp + val);
+      update();
+    }
+    function adjustGlu(val) {
+      glu = Math.max(0, glu + val);
+      update();
+    }
+    function reset() {
+      turn = 1; isDay = true; atp = 20; glu = 0;
+      update();
+    }
+    update();
+  </script>
 </body>
 </html>
