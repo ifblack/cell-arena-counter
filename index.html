@@ -1,11 +1,12 @@
 
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Cell Arena ATP Counter</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
+<meta charset="utf-8"/>
+<title>Cell Arena ATP Counter</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<style>
     body { font-family: "Segoe UI", sans-serif; margin: 10px; background: #f8fbff; }
     h1 { text-align: center; color: #1a2c43; }
     .player { border: 2px solid #ccc; border-radius: 12px; padding: 12px; margin: 16px 0; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
@@ -15,7 +16,6 @@
     button { font-size: 1.2em; padding: 4px 10px; margin: 2px; border-radius: 6px; border: none; background: #1976d2; color: white; }
     button:active { background: #145ea8; }
   </style>
-  
 <script>
 let isDay = true;
 let nextToggle = true;
@@ -162,23 +162,19 @@ function addSection(playerId, sectionType, sectionName, emoji, defaultValue) {
 }
 
 </script>
-
 </head>
 <body>
-  <h1>🧪 Cell Arena ATP Counter</h1>
-
-  <div style="text-align:center; margin-bottom: 12px;">
-    <span id="label-turn" style="font-weight:bold;">Turn:</span>
-    <button onclick="update('turn', -1)">−</button>
-    <input type="number" id="turn" class="value-input" value="1" min="1" max="999">
-    <button onclick="update('turn', 1)">+</button>
-    <span id="daynight" style="font-weight:bold; margin-left: 20px;">🌞 Day</span>
-    <button id="switch-btn" onclick="toggleDayNight()" style="margin-left: 10px;">Switch</button>
-  </div>
-
-  
+<h1>🧪 Cell Arena ATP Counter</h1>
+<div style="text-align:center; margin-bottom: 12px;">
+<span id="label-turn" style="font-weight:bold;">Turn:</span>
+<button onclick="update('turn', -1)">−</button>
+<input class="value-input" id="turn" max="999" min="1" type="number" value="1"/>
+<button onclick="update('turn', 1)">+</button>
+<span id="daynight" style="font-weight:bold; margin-left: 20px;">🌞 Day</span>
+<button id="switch-btn" onclick="toggleDayNight()" style="margin-left: 10px;">Switch</button>
+</div>
 <div style="text-align:center; margin: 12px;">
-  <button onclick="playSound(); nextTurn()" style="
+<button onclick="playSound(); nextTurn()" style="
     background: linear-gradient(to bottom, #28a745, #218838);
     border: none;
     color: white;
@@ -188,184 +184,170 @@ function addSection(playerId, sectionType, sectionName, emoji, defaultValue) {
     border-radius: 50%;
     box-shadow: 0 4px #1c7430;">Next</button>
 </div>
-
 <div id="leaderboard" style="padding:10px; margin:10px; background:#e3f2fd; border-radius:10px;"></div>
-
-  
-
-
-
-
-  <h2>👤 <input id="p1_name" value="Player 1" style="font-size:1em; padding:2px 8px; border-radius:6px;"></h2>
-  <div class="counter">
-    <span class="label">⚡ ATP:</span>
-    <button onclick="update('atp1', -1, 999)">−</button>
-    <input type="number" min="0" max="999" value="20" class="value-input" id="atp1">
-    <button onclick="update('atp1', 1, 999)">+</button>
-  </div>
-  <div class="counter">
-    <span class="label">🍞 Glucose:</span>
-    <button onclick="update('glu1', -1, 999)">−</button>
-    <input type="number" min="0" max="999" value="0" class="value-input" id="glu1">
-    <button onclick="update('glu1', 1, 999)">+</button>
-  </div>
-  <div class="toolbar">
-    <button onclick="addSection(1, 'mito', 'Mitosis', '🧬', 0)">🧬</button>
-    <button onclick="addSection(1, 'cell', 'Cell', '🔬', 1)">🔬</button>
-    <button onclick="addSection(1, 'infect', 'Infect', '🦠', 0)">🦠</button>
-    <button onclick="addSection(1, 'immune', 'Immune', '🛡️', 2)">🛡️</button>
-    <button onclick="clearAll(1)">🧹Clear</button>
-    <button onclick="resetAll(1)">🔁Reset</button>
-  </div>
-  <div class="section" id="mito-container-1"></div>
-  <div class="section" id="cell-container-1"></div>
-  <div class="section" id="infect-container-1"></div>
-  <div class="section" id="immune-container-1"></div>
+<h2>👤 <input id="p1_name" style="font-size:1em; padding:2px 8px; border-radius:6px;" value="Player 1"/></h2>
+<div class="counter">
+<span class="label">⚡ ATP:</span>
+<button onclick="update('atp1', -1, 999)">−</button>
+<input class="value-input" id="atp1" max="999" min="0" type="number" value="20"/>
+<button onclick="update('atp1', 1, 999)">+</button>
 </div>
+<div class="counter">
+<span class="label">🍞 Glucose:</span>
+<button onclick="update('glu1', -1, 999)">−</button>
+<input class="value-input" id="glu1" max="999" min="0" type="number" value="0"/>
+<button onclick="update('glu1', 1, 999)">+</button>
+</div>
+<div class="toolbar">
+<button onclick="addSection(1, 'mito', 'Mitosis', '🧬', 0)">🧬</button>
+<button onclick="addSection(1, 'cell', 'Cell', '🔬', 1)">🔬</button>
+<button onclick="addSection(1, 'infect', 'Infect', '🦠', 0)">🦠</button>
+<button onclick="addSection(1, 'immune', 'Immune', '🛡️', 2)">🛡️</button>
+
+
+</div>
+<div class="section" id="mito-container-1"></div>
+<div class="section" id="cell-container-1"></div>
+<div class="section" id="infect-container-1"></div>
+<div class="section" id="immune-container-1"></div>
 
 <div class="player">
-  <h2>👤 <input id="p2_name" value="Player 2" style="font-size:1em; padding:2px 8px; border-radius:6px;"></h2>
-  <div class="counter">
-    <span class="label">⚡ ATP:</span>
-    <button onclick="update('atp2', -1, 999)">−</button>
-    <input type="number" min="0" max="999" value="20" class="value-input" id="atp2">
-    <button onclick="update('atp2', 1, 999)">+</button>
-  </div>
-  <div class="counter">
-    <span class="label">🍞 Glucose:</span>
-    <button onclick="update('glu2', -1, 999)">−</button>
-    <input type="number" min="0" max="999" value="0" class="value-input" id="glu2">
-    <button onclick="update('glu2', 1, 999)">+</button>
-  </div>
-  <div class="toolbar">
-    <button onclick="addSection(2, 'mito', 'Mitosis', '🧬', 0)">🧬</button>
-    <button onclick="addSection(2, 'cell', 'Cell', '🔬', 1)">🔬</button>
-    <button onclick="addSection(2, 'infect', 'Infect', '🦠', 0)">🦠</button>
-    <button onclick="addSection(2, 'immune', 'Immune', '🛡️', 2)">🛡️</button>
-    <button onclick="clearAll(2)">🧹Clear</button>
-    <button onclick="resetAll(2)">🔁Reset</button>
-  </div>
-  <div class="section" id="mito-container-2"></div>
-  <div class="section" id="cell-container-2"></div>
-  <div class="section" id="infect-container-2"></div>
-  <div class="section" id="immune-container-2"></div>
+<h2>👤 <input id="p2_name" style="font-size:1em; padding:2px 8px; border-radius:6px;" value="Player 2"/></h2>
+<div class="counter">
+<span class="label">⚡ ATP:</span>
+<button onclick="update('atp2', -1, 999)">−</button>
+<input class="value-input" id="atp2" max="999" min="0" type="number" value="20"/>
+<button onclick="update('atp2', 1, 999)">+</button>
 </div>
-
-<div class="player">
-  <h2>👤 <input id="p3_name" value="Player 3" style="font-size:1em; padding:2px 8px; border-radius:6px;"></h2>
-  <div class="counter">
-    <span class="label">⚡ ATP:</span>
-    <button onclick="update('atp3', -1, 999)">−</button>
-    <input type="number" min="0" max="999" value="20" class="value-input" id="atp3">
-    <button onclick="update('atp3', 1, 999)">+</button>
-  </div>
-  <div class="counter">
-    <span class="label">🍞 Glucose:</span>
-    <button onclick="update('glu3', -1, 999)">−</button>
-    <input type="number" min="0" max="999" value="0" class="value-input" id="glu3">
-    <button onclick="update('glu3', 1, 999)">+</button>
-  </div>
-  <div class="toolbar">
-    <button onclick="addSection(3, 'mito', 'Mitosis', '🧬', 0)">🧬</button>
-    <button onclick="addSection(3, 'cell', 'Cell', '🔬', 1)">🔬</button>
-    <button onclick="addSection(3, 'infect', 'Infect', '🦠', 0)">🦠</button>
-    <button onclick="addSection(3, 'immune', 'Immune', '🛡️', 2)">🛡️</button>
-    <button onclick="clearAll(3)">🧹Clear</button>
-    <button onclick="resetAll(3)">🔁Reset</button>
-  </div>
-  <div class="section" id="mito-container-3"></div>
-  <div class="section" id="cell-container-3"></div>
-  <div class="section" id="infect-container-3"></div>
-  <div class="section" id="immune-container-3"></div>
+<div class="counter">
+<span class="label">🍞 Glucose:</span>
+<button onclick="update('glu2', -1, 999)">−</button>
+<input class="value-input" id="glu2" max="999" min="0" type="number" value="0"/>
+<button onclick="update('glu2', 1, 999)">+</button>
 </div>
+<div class="toolbar">
+<button onclick="addSection(2, 'mito', 'Mitosis', '🧬', 0)">🧬</button>
+<button onclick="addSection(2, 'cell', 'Cell', '🔬', 1)">🔬</button>
+<button onclick="addSection(2, 'infect', 'Infect', '🦠', 0)">🦠</button>
+<button onclick="addSection(2, 'immune', 'Immune', '🛡️', 2)">🛡️</button>
 
-<div class="player">
-  <h2>👤 <input id="p4_name" value="Player 4" style="font-size:1em; padding:2px 8px; border-radius:6px;"></h2>
-  <div class="counter">
-    <span class="label">⚡ ATP:</span>
-    <button onclick="update('atp4', -1, 999)">−</button>
-    <input type="number" min="0" max="999" value="20" class="value-input" id="atp4">
-    <button onclick="update('atp4', 1, 999)">+</button>
-  </div>
-  <div class="counter">
-    <span class="label">🍞 Glucose:</span>
-    <button onclick="update('glu4', -1, 999)">−</button>
-    <input type="number" min="0" max="999" value="0" class="value-input" id="glu4">
-    <button onclick="update('glu4', 1, 999)">+</button>
-  </div>
-  <div class="toolbar">
-    <button onclick="addSection(4, 'mito', 'Mitosis', '🧬', 0)">🧬</button>
-    <button onclick="addSection(4, 'cell', 'Cell', '🔬', 1)">🔬</button>
-    <button onclick="addSection(4, 'infect', 'Infect', '🦠', 0)">🦠</button>
-    <button onclick="addSection(4, 'immune', 'Immune', '🛡️', 2)">🛡️</button>
-    <button onclick="clearAll(4)">🧹Clear</button>
-    <button onclick="resetAll(4)">🔁Reset</button>
-  </div>
-  <div class="section" id="mito-container-4"></div>
-  <div class="section" id="cell-container-4"></div>
-  <div class="section" id="infect-container-4"></div>
-  <div class="section" id="immune-container-4"></div>
+
 </div>
-
-<div class="player">
-  <h2>👤 <input id="p5_name" value="Player 5" style="font-size:1em; padding:2px 8px; border-radius:6px;"></h2>
-  <div class="counter">
-    <span class="label">⚡ ATP:</span>
-    <button onclick="update('atp5', -1, 999)">−</button>
-    <input type="number" min="0" max="999" value="20" class="value-input" id="atp5">
-    <button onclick="update('atp5', 1, 999)">+</button>
-  </div>
-  <div class="counter">
-    <span class="label">🍞 Glucose:</span>
-    <button onclick="update('glu5', -1, 999)">−</button>
-    <input type="number" min="0" max="999" value="0" class="value-input" id="glu5">
-    <button onclick="update('glu5', 1, 999)">+</button>
-  </div>
-  <div class="toolbar">
-    <button onclick="addSection(5, 'mito', 'Mitosis', '🧬', 0)">🧬</button>
-    <button onclick="addSection(5, 'cell', 'Cell', '🔬', 1)">🔬</button>
-    <button onclick="addSection(5, 'infect', 'Infect', '🦠', 0)">🦠</button>
-    <button onclick="addSection(5, 'immune', 'Immune', '🛡️', 2)">🛡️</button>
-    <button onclick="clearAll(5)">🧹Clear</button>
-    <button onclick="resetAll(5)">🔁Reset</button>
-  </div>
-  <div class="section" id="mito-container-5"></div>
-  <div class="section" id="cell-container-5"></div>
-  <div class="section" id="infect-container-5"></div>
-  <div class="section" id="immune-container-5"></div>
+<div class="section" id="mito-container-2"></div>
+<div class="section" id="cell-container-2"></div>
+<div class="section" id="infect-container-2"></div>
+<div class="section" id="immune-container-2"></div>
 </div>
-
 <div class="player">
-  <h2>👤 <input id="p6_name" value="Player 6" style="font-size:1em; padding:2px 8px; border-radius:6px;"></h2>
-  <div class="counter">
-    <span class="label">⚡ ATP:</span>
-    <button onclick="update('atp6', -1, 999)">−</button>
-    <input type="number" min="0" max="999" value="20" class="value-input" id="atp6">
-    <button onclick="update('atp6', 1, 999)">+</button>
-  </div>
-  <div class="counter">
-    <span class="label">🍞 Glucose:</span>
-    <button onclick="update('glu6', -1, 999)">−</button>
-    <input type="number" min="0" max="999" value="0" class="value-input" id="glu6">
-    <button onclick="update('glu6', 1, 999)">+</button>
-  </div>
-  <div class="toolbar">
-    <button onclick="addSection(6, 'mito', 'Mitosis', '🧬', 0)">🧬</button>
-    <button onclick="addSection(6, 'cell', 'Cell', '🔬', 1)">🔬</button>
-    <button onclick="addSection(6, 'infect', 'Infect', '🦠', 0)">🦠</button>
-    <button onclick="addSection(6, 'immune', 'Immune', '🛡️', 2)">🛡️</button>
-    <button onclick="clearAll(6)">🧹Clear</button>
-    <button onclick="resetAll(6)">🔁Reset</button>
-  </div>
-  <div class="section" id="mito-container-6"></div>
-  <div class="section" id="cell-container-6"></div>
-  <div class="section" id="infect-container-6"></div>
-  <div class="section" id="immune-container-6"></div>
+<h2>👤 <input id="p3_name" style="font-size:1em; padding:2px 8px; border-radius:6px;" value="Player 3"/></h2>
+<div class="counter">
+<span class="label">⚡ ATP:</span>
+<button onclick="update('atp3', -1, 999)">−</button>
+<input class="value-input" id="atp3" max="999" min="0" type="number" value="20"/>
+<button onclick="update('atp3', 1, 999)">+</button>
+</div>
+<div class="counter">
+<span class="label">🍞 Glucose:</span>
+<button onclick="update('glu3', -1, 999)">−</button>
+<input class="value-input" id="glu3" max="999" min="0" type="number" value="0"/>
+<button onclick="update('glu3', 1, 999)">+</button>
+</div>
+<div class="toolbar">
+<button onclick="addSection(3, 'mito', 'Mitosis', '🧬', 0)">🧬</button>
+<button onclick="addSection(3, 'cell', 'Cell', '🔬', 1)">🔬</button>
+<button onclick="addSection(3, 'infect', 'Infect', '🦠', 0)">🦠</button>
+<button onclick="addSection(3, 'immune', 'Immune', '🛡️', 2)">🛡️</button>
 
-  </div>
-  
+
+</div>
+<div class="section" id="mito-container-3"></div>
+<div class="section" id="cell-container-3"></div>
+<div class="section" id="infect-container-3"></div>
+<div class="section" id="immune-container-3"></div>
+</div>
+<div class="player">
+<h2>👤 <input id="p4_name" style="font-size:1em; padding:2px 8px; border-radius:6px;" value="Player 4"/></h2>
+<div class="counter">
+<span class="label">⚡ ATP:</span>
+<button onclick="update('atp4', -1, 999)">−</button>
+<input class="value-input" id="atp4" max="999" min="0" type="number" value="20"/>
+<button onclick="update('atp4', 1, 999)">+</button>
+</div>
+<div class="counter">
+<span class="label">🍞 Glucose:</span>
+<button onclick="update('glu4', -1, 999)">−</button>
+<input class="value-input" id="glu4" max="999" min="0" type="number" value="0"/>
+<button onclick="update('glu4', 1, 999)">+</button>
+</div>
+<div class="toolbar">
+<button onclick="addSection(4, 'mito', 'Mitosis', '🧬', 0)">🧬</button>
+<button onclick="addSection(4, 'cell', 'Cell', '🔬', 1)">🔬</button>
+<button onclick="addSection(4, 'infect', 'Infect', '🦠', 0)">🦠</button>
+<button onclick="addSection(4, 'immune', 'Immune', '🛡️', 2)">🛡️</button>
+
+
+</div>
+<div class="section" id="mito-container-4"></div>
+<div class="section" id="cell-container-4"></div>
+<div class="section" id="infect-container-4"></div>
+<div class="section" id="immune-container-4"></div>
+</div>
+<div class="player">
+<h2>👤 <input id="p5_name" style="font-size:1em; padding:2px 8px; border-radius:6px;" value="Player 5"/></h2>
+<div class="counter">
+<span class="label">⚡ ATP:</span>
+<button onclick="update('atp5', -1, 999)">−</button>
+<input class="value-input" id="atp5" max="999" min="0" type="number" value="20"/>
+<button onclick="update('atp5', 1, 999)">+</button>
+</div>
+<div class="counter">
+<span class="label">🍞 Glucose:</span>
+<button onclick="update('glu5', -1, 999)">−</button>
+<input class="value-input" id="glu5" max="999" min="0" type="number" value="0"/>
+<button onclick="update('glu5', 1, 999)">+</button>
+</div>
+<div class="toolbar">
+<button onclick="addSection(5, 'mito', 'Mitosis', '🧬', 0)">🧬</button>
+<button onclick="addSection(5, 'cell', 'Cell', '🔬', 1)">🔬</button>
+<button onclick="addSection(5, 'infect', 'Infect', '🦠', 0)">🦠</button>
+<button onclick="addSection(5, 'immune', 'Immune', '🛡️', 2)">🛡️</button>
+
+
+</div>
+<div class="section" id="mito-container-5"></div>
+<div class="section" id="cell-container-5"></div>
+<div class="section" id="infect-container-5"></div>
+<div class="section" id="immune-container-5"></div>
+</div>
+<div class="player">
+<h2>👤 <input id="p6_name" style="font-size:1em; padding:2px 8px; border-radius:6px;" value="Player 6"/></h2>
+<div class="counter">
+<span class="label">⚡ ATP:</span>
+<button onclick="update('atp6', -1, 999)">−</button>
+<input class="value-input" id="atp6" max="999" min="0" type="number" value="20"/>
+<button onclick="update('atp6', 1, 999)">+</button>
+</div>
+<div class="counter">
+<span class="label">🍞 Glucose:</span>
+<button onclick="update('glu6', -1, 999)">−</button>
+<input class="value-input" id="glu6" max="999" min="0" type="number" value="0"/>
+<button onclick="update('glu6', 1, 999)">+</button>
+</div>
+<div class="toolbar">
+<button onclick="addSection(6, 'mito', 'Mitosis', '🧬', 0)">🧬</button>
+<button onclick="addSection(6, 'cell', 'Cell', '🔬', 1)">🔬</button>
+<button onclick="addSection(6, 'infect', 'Infect', '🦠', 0)">🦠</button>
+<button onclick="addSection(6, 'immune', 'Immune', '🛡️', 2)">🛡️</button>
+
+
+</div>
+<div class="section" id="mito-container-6"></div>
+<div class="section" id="cell-container-6"></div>
+<div class="section" id="infect-container-6"></div>
+<div class="section" id="immune-container-6"></div>
+</div>
 <div style="text-align:center; margin: 30px;">
-  <button onclick="playSound(); resetGame()" style="
+<button onclick="playSound(); resetGame()" style="
     background: #dc3545;
     color: white;
     font-size: 1.1em;
@@ -376,7 +358,6 @@ function addSection(playerId, sectionType, sectionName, emoji, defaultValue) {
     🔁 Restart Game
   </button>
 </div>
-
 <audio id="click-sound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_b0b2e878c7.mp3"></audio>
 <script>
 function playSound() {
@@ -387,6 +368,5 @@ function playSound() {
   }
 }
 </script>
-
 </body>
 </html>
