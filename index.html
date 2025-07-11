@@ -163,7 +163,7 @@ function addSection(playerId, sectionType, sectionName, emoji, defaultValue) {
 
 </script>
 </head>
-<body>
+<body style=" max-width: 750px; margin: 0 auto;">
 <h1>🧪 Cell Arena ATP Counter</h1>
 <div style="text-align:center; margin-bottom: 12px;">
 <span id="label-turn" style="font-weight:bold;">Turn:</span>
@@ -184,34 +184,23 @@ function addSection(playerId, sectionType, sectionName, emoji, defaultValue) {
     border-radius: 50%;
     box-shadow: 0 4px #1c7430;">Next</button>
 </div>
-<div id="leaderboard" style="padding:10px; margin:10px; background:#e3f2fd; border-radius:10px;"></div>
-
-<div class="player">    
-<h2>👤 <input id="p1_name" style="font-size:1em; padding:2px 8px; border-radius:6px;" value="Player 1"/></h2>
-<div class="counter">
+<div class="player" id="leaderboard" style="width: 400px; margin: 16px auto; background:#e3f2fd; border-radius:12px; border:2px solid #ccc; padding:12px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);"></div>
+<div class="player" style="width: 400px; margin: 16px auto;"><h2>👤 <input id="p1_name" style="font-size:1em; padding:2px 8px; border-radius:6px;" value="Player 1"/></h2><div class="counter">
 <span class="label">⚡ ATP:</span>
 <button onclick="update('atp1', -1, 999)">−</button>
 <input class="value-input" id="atp1" max="999" min="0" type="number" value="20"/>
 <button onclick="update('atp1', 1, 999)">+</button>
-</div>
-<div class="counter">
+</div><div class="counter">
 <span class="label">🍞 Glucose:</span>
 <button onclick="update('glu1', -1, 999)">−</button>
 <input class="value-input" id="glu1" max="999" min="0" type="number" value="0"/>
 <button onclick="update('glu1', 1, 999)">+</button>
-</div>
-<div class="toolbar">
-<button onclick="addSection(1, 'mito', 'Mitosis', '🧬', 0)">🧬</button>
-<button onclick="addSection(1, 'cell', 'Cell', '🔬', 1)">🔬</button>
-<button onclick="addSection(1, 'infect', 'Infect', '🦠', 0)">🦠</button>
-<button onclick="addSection(1, 'immune', 'Immune', '🛡️', 2)">🛡️</button>
-</div>
-<div class="section" id="mito-container-1"></div>
-<div class="section" id="cell-container-1"></div>
-<div class="section" id="infect-container-1"></div>
-<div class="section" id="immune-container-1"></div>
-
-<div class="player">
+</div><div class="toolbar" style="display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 10px; margin-top: 10px;">
+<button onclick="addSection(1, 'mito', 'Mitosis', '🧬', 0)" onmousedown="this.style.transform='scale(0.95)'" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#d0ebff'" onmouseup="this.style.transform='scale(1)'" style="font-size: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin: 4px; padding: 0; border: none; border-radius: 8px; background-color: #ffffff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s ease;">🧬</button>
+<button onclick="addSection(1, 'cell', 'Cell', '🔬', 1)" onmousedown="this.style.transform='scale(0.95)'" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#d0ebff'" onmouseup="this.style.transform='scale(1)'" style="font-size: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin: 4px; padding: 0; border: none; border-radius: 8px; background-color: #ffffff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s ease;">🔬</button>
+<button onclick="addSection(1, 'infect', 'Infect', '🦠', 0)" onmousedown="this.style.transform='scale(0.95)'" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#d0ebff'" onmouseup="this.style.transform='scale(1)'" style="font-size: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin: 4px; padding: 0; border: none; border-radius: 8px; background-color: #ffffff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s ease;">🦠</button>
+<button onclick="addSection(1, 'immune', 'Immune', '🛡️', 2)" onmousedown="this.style.transform='scale(0.95)'" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#d0ebff'" onmouseup="this.style.transform='scale(1)'" style="font-size: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin: 4px; padding: 0; border: none; border-radius: 8px; background-color: #ffffff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s ease;">🛡️</button>
+</div><div class="section" id="mito-container-1"></div><div class="section" id="cell-container-1"></div><div class="section" id="infect-container-1"></div><div class="section" id="immune-container-1"></div></div><div class="player" style="width: 400px; margin: 16px auto;">
 <h2>👤 <input id="p2_name" style="font-size:1em; padding:2px 8px; border-radius:6px;" value="Player 2"/></h2>
 <div class="counter">
 <span class="label">⚡ ATP:</span>
@@ -225,20 +214,18 @@ function addSection(playerId, sectionType, sectionName, emoji, defaultValue) {
 <input class="value-input" id="glu2" max="999" min="0" type="number" value="0"/>
 <button onclick="update('glu2', 1, 999)">+</button>
 </div>
-<div class="toolbar">
-<button onclick="addSection(2, 'mito', 'Mitosis', '🧬', 0)">🧬</button>
-<button onclick="addSection(2, 'cell', 'Cell', '🔬', 1)">🔬</button>
-<button onclick="addSection(2, 'infect', 'Infect', '🦠', 0)">🦠</button>
-<button onclick="addSection(2, 'immune', 'Immune', '🛡️', 2)">🛡️</button>
-
-
+<div class="toolbar" style="display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 10px; margin-top: 10px;">
+<button onclick="addSection(2, 'mito', 'Mitosis', '🧬', 0)" onmousedown="this.style.transform='scale(0.95)'" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#d0ebff'" onmouseup="this.style.transform='scale(1)'" style="font-size: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin: 4px; padding: 0; border: none; border-radius: 8px; background-color: #ffffff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s ease;">🧬</button>
+<button onclick="addSection(2, 'cell', 'Cell', '🔬', 1)" onmousedown="this.style.transform='scale(0.95)'" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#d0ebff'" onmouseup="this.style.transform='scale(1)'" style="font-size: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin: 4px; padding: 0; border: none; border-radius: 8px; background-color: #ffffff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s ease;">🔬</button>
+<button onclick="addSection(2, 'infect', 'Infect', '🦠', 0)" onmousedown="this.style.transform='scale(0.95)'" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#d0ebff'" onmouseup="this.style.transform='scale(1)'" style="font-size: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin: 4px; padding: 0; border: none; border-radius: 8px; background-color: #ffffff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s ease;">🦠</button>
+<button onclick="addSection(2, 'immune', 'Immune', '🛡️', 2)" onmousedown="this.style.transform='scale(0.95)'" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#d0ebff'" onmouseup="this.style.transform='scale(1)'" style="font-size: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin: 4px; padding: 0; border: none; border-radius: 8px; background-color: #ffffff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s ease;">🛡️</button>
 </div>
 <div class="section" id="mito-container-2"></div>
 <div class="section" id="cell-container-2"></div>
 <div class="section" id="infect-container-2"></div>
 <div class="section" id="immune-container-2"></div>
 </div>
-<div class="player">
+<div class="player" style="width: 400px; margin: 16px auto;">
 <h2>👤 <input id="p3_name" style="font-size:1em; padding:2px 8px; border-radius:6px;" value="Player 3"/></h2>
 <div class="counter">
 <span class="label">⚡ ATP:</span>
@@ -252,20 +239,18 @@ function addSection(playerId, sectionType, sectionName, emoji, defaultValue) {
 <input class="value-input" id="glu3" max="999" min="0" type="number" value="0"/>
 <button onclick="update('glu3', 1, 999)">+</button>
 </div>
-<div class="toolbar">
-<button onclick="addSection(3, 'mito', 'Mitosis', '🧬', 0)">🧬</button>
-<button onclick="addSection(3, 'cell', 'Cell', '🔬', 1)">🔬</button>
-<button onclick="addSection(3, 'infect', 'Infect', '🦠', 0)">🦠</button>
-<button onclick="addSection(3, 'immune', 'Immune', '🛡️', 2)">🛡️</button>
-
-
+<div class="toolbar" style="display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 10px; margin-top: 10px;">
+<button onclick="addSection(3, 'mito', 'Mitosis', '🧬', 0)" onmousedown="this.style.transform='scale(0.95)'" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#d0ebff'" onmouseup="this.style.transform='scale(1)'" style="font-size: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin: 4px; padding: 0; border: none; border-radius: 8px; background-color: #ffffff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s ease;">🧬</button>
+<button onclick="addSection(3, 'cell', 'Cell', '🔬', 1)" onmousedown="this.style.transform='scale(0.95)'" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#d0ebff'" onmouseup="this.style.transform='scale(1)'" style="font-size: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin: 4px; padding: 0; border: none; border-radius: 8px; background-color: #ffffff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s ease;">🔬</button>
+<button onclick="addSection(3, 'infect', 'Infect', '🦠', 0)" onmousedown="this.style.transform='scale(0.95)'" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#d0ebff'" onmouseup="this.style.transform='scale(1)'" style="font-size: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin: 4px; padding: 0; border: none; border-radius: 8px; background-color: #ffffff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s ease;">🦠</button>
+<button onclick="addSection(3, 'immune', 'Immune', '🛡️', 2)" onmousedown="this.style.transform='scale(0.95)'" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#d0ebff'" onmouseup="this.style.transform='scale(1)'" style="font-size: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin: 4px; padding: 0; border: none; border-radius: 8px; background-color: #ffffff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s ease;">🛡️</button>
 </div>
 <div class="section" id="mito-container-3"></div>
 <div class="section" id="cell-container-3"></div>
 <div class="section" id="infect-container-3"></div>
 <div class="section" id="immune-container-3"></div>
 </div>
-<div class="player">
+<div class="player" style="width: 400px; margin: 16px auto;">
 <h2>👤 <input id="p4_name" style="font-size:1em; padding:2px 8px; border-radius:6px;" value="Player 4"/></h2>
 <div class="counter">
 <span class="label">⚡ ATP:</span>
@@ -279,20 +264,18 @@ function addSection(playerId, sectionType, sectionName, emoji, defaultValue) {
 <input class="value-input" id="glu4" max="999" min="0" type="number" value="0"/>
 <button onclick="update('glu4', 1, 999)">+</button>
 </div>
-<div class="toolbar">
-<button onclick="addSection(4, 'mito', 'Mitosis', '🧬', 0)">🧬</button>
-<button onclick="addSection(4, 'cell', 'Cell', '🔬', 1)">🔬</button>
-<button onclick="addSection(4, 'infect', 'Infect', '🦠', 0)">🦠</button>
-<button onclick="addSection(4, 'immune', 'Immune', '🛡️', 2)">🛡️</button>
-
-
+<div class="toolbar" style="display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 10px; margin-top: 10px;">
+<button onclick="addSection(4, 'mito', 'Mitosis', '🧬', 0)" onmousedown="this.style.transform='scale(0.95)'" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#d0ebff'" onmouseup="this.style.transform='scale(1)'" style="font-size: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin: 4px; padding: 0; border: none; border-radius: 8px; background-color: #ffffff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s ease;">🧬</button>
+<button onclick="addSection(4, 'cell', 'Cell', '🔬', 1)" onmousedown="this.style.transform='scale(0.95)'" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#d0ebff'" onmouseup="this.style.transform='scale(1)'" style="font-size: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin: 4px; padding: 0; border: none; border-radius: 8px; background-color: #ffffff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s ease;">🔬</button>
+<button onclick="addSection(4, 'infect', 'Infect', '🦠', 0)" onmousedown="this.style.transform='scale(0.95)'" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#d0ebff'" onmouseup="this.style.transform='scale(1)'" style="font-size: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin: 4px; padding: 0; border: none; border-radius: 8px; background-color: #ffffff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s ease;">🦠</button>
+<button onclick="addSection(4, 'immune', 'Immune', '🛡️', 2)" onmousedown="this.style.transform='scale(0.95)'" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#d0ebff'" onmouseup="this.style.transform='scale(1)'" style="font-size: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin: 4px; padding: 0; border: none; border-radius: 8px; background-color: #ffffff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s ease;">🛡️</button>
 </div>
 <div class="section" id="mito-container-4"></div>
 <div class="section" id="cell-container-4"></div>
 <div class="section" id="infect-container-4"></div>
 <div class="section" id="immune-container-4"></div>
 </div>
-<div class="player">
+<div class="player" style="width: 400px; margin: 16px auto;">
 <h2>👤 <input id="p5_name" style="font-size:1em; padding:2px 8px; border-radius:6px;" value="Player 5"/></h2>
 <div class="counter">
 <span class="label">⚡ ATP:</span>
@@ -306,20 +289,18 @@ function addSection(playerId, sectionType, sectionName, emoji, defaultValue) {
 <input class="value-input" id="glu5" max="999" min="0" type="number" value="0"/>
 <button onclick="update('glu5', 1, 999)">+</button>
 </div>
-<div class="toolbar">
-<button onclick="addSection(5, 'mito', 'Mitosis', '🧬', 0)">🧬</button>
-<button onclick="addSection(5, 'cell', 'Cell', '🔬', 1)">🔬</button>
-<button onclick="addSection(5, 'infect', 'Infect', '🦠', 0)">🦠</button>
-<button onclick="addSection(5, 'immune', 'Immune', '🛡️', 2)">🛡️</button>
-
-
+<div class="toolbar" style="display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 10px; margin-top: 10px;">
+<button onclick="addSection(5, 'mito', 'Mitosis', '🧬', 0)" onmousedown="this.style.transform='scale(0.95)'" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#d0ebff'" onmouseup="this.style.transform='scale(1)'" style="font-size: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin: 4px; padding: 0; border: none; border-radius: 8px; background-color: #ffffff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s ease;">🧬</button>
+<button onclick="addSection(5, 'cell', 'Cell', '🔬', 1)" onmousedown="this.style.transform='scale(0.95)'" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#d0ebff'" onmouseup="this.style.transform='scale(1)'" style="font-size: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin: 4px; padding: 0; border: none; border-radius: 8px; background-color: #ffffff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s ease;">🔬</button>
+<button onclick="addSection(5, 'infect', 'Infect', '🦠', 0)" onmousedown="this.style.transform='scale(0.95)'" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#d0ebff'" onmouseup="this.style.transform='scale(1)'" style="font-size: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin: 4px; padding: 0; border: none; border-radius: 8px; background-color: #ffffff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s ease;">🦠</button>
+<button onclick="addSection(5, 'immune', 'Immune', '🛡️', 2)" onmousedown="this.style.transform='scale(0.95)'" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#d0ebff'" onmouseup="this.style.transform='scale(1)'" style="font-size: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin: 4px; padding: 0; border: none; border-radius: 8px; background-color: #ffffff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s ease;">🛡️</button>
 </div>
 <div class="section" id="mito-container-5"></div>
 <div class="section" id="cell-container-5"></div>
 <div class="section" id="infect-container-5"></div>
 <div class="section" id="immune-container-5"></div>
 </div>
-<div class="player">
+<div class="player" style="width: 400px; margin: 16px auto;">
 <h2>👤 <input id="p6_name" style="font-size:1em; padding:2px 8px; border-radius:6px;" value="Player 6"/></h2>
 <div class="counter">
 <span class="label">⚡ ATP:</span>
@@ -333,13 +314,11 @@ function addSection(playerId, sectionType, sectionName, emoji, defaultValue) {
 <input class="value-input" id="glu6" max="999" min="0" type="number" value="0"/>
 <button onclick="update('glu6', 1, 999)">+</button>
 </div>
-<div class="toolbar">
-<button onclick="addSection(6, 'mito', 'Mitosis', '🧬', 0)">🧬</button>
-<button onclick="addSection(6, 'cell', 'Cell', '🔬', 1)">🔬</button>
-<button onclick="addSection(6, 'infect', 'Infect', '🦠', 0)">🦠</button>
-<button onclick="addSection(6, 'immune', 'Immune', '🛡️', 2)">🛡️</button>
-
-
+<div class="toolbar" style="display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 10px; margin-top: 10px;">
+<button onclick="addSection(6, 'mito', 'Mitosis', '🧬', 0)" onmousedown="this.style.transform='scale(0.95)'" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#d0ebff'" onmouseup="this.style.transform='scale(1)'" style="font-size: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin: 4px; padding: 0; border: none; border-radius: 8px; background-color: #ffffff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s ease;">🧬</button>
+<button onclick="addSection(6, 'cell', 'Cell', '🔬', 1)" onmousedown="this.style.transform='scale(0.95)'" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#d0ebff'" onmouseup="this.style.transform='scale(1)'" style="font-size: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin: 4px; padding: 0; border: none; border-radius: 8px; background-color: #ffffff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s ease;">🔬</button>
+<button onclick="addSection(6, 'infect', 'Infect', '🦠', 0)" onmousedown="this.style.transform='scale(0.95)'" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#d0ebff'" onmouseup="this.style.transform='scale(1)'" style="font-size: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin: 4px; padding: 0; border: none; border-radius: 8px; background-color: #ffffff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s ease;">🦠</button>
+<button onclick="addSection(6, 'immune', 'Immune', '🛡️', 2)" onmousedown="this.style.transform='scale(0.95)'" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#d0ebff'" onmouseup="this.style.transform='scale(1)'" style="font-size: 22px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin: 4px; padding: 0; border: none; border-radius: 8px; background-color: #ffffff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s ease;">🛡️</button>
 </div>
 <div class="section" id="mito-container-6"></div>
 <div class="section" id="cell-container-6"></div>
