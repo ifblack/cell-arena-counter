@@ -7,15 +7,72 @@
 <title>Cell Arena ATP Counter</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <style>
-    body { font-family: "Segoe UI", sans-serif; margin: 10px; background: #f8fbff; }
-    h1 { text-align: center; color: #1a2c43; }
-    .player { border: 2px solid #ccc; border-radius: 12px; padding: 12px; margin: 16px 0; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+    body {
+    font-family: "Segoe UI", sans-serif;
+    margin: 0;                         /* 建议取消 body 外边距 */
+    background: #f8fbff;
+  }
+
+  h1 {
+    text-align: center;
+    color: #1a2c43;
+  }
+
+  .wrapper {
+    width: 100%;
+    max-width: 750px;
+    margin: 10px auto;                /* ← 改由 wrapper 来控制整体外边距 */
+    padding: 10px;                    /* 页面内边距不变 */
+    box-sizing: border-box;
+  }
+
+/* 玩家卡片框样式 */
+.player {
+  width: 100%;
+  max-width: 700px;
+  min-width: 350px;
+  margin: 16px auto;             /* 上下16px间距，左右居中 */
+  padding: 12px;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;        /* 防止 padding 撑破宽度 */
+}   
     .counter { display: flex; align-items: center; margin: 8px 0; }
     .label { font-weight: bold; width: 110px; }
     .value-input { font-size: 1.2em; width: 60px; text-align: center; margin: 0 10px; padding: 2px; border-radius: 6px; border: 1px solid #ccc; }
     button { font-size: 1.2em; padding: 4px 10px; margin: 2px; border-radius: 6px; border: none; background: #1976d2; color: white; }
     button:active { background: #145ea8; }
+    .action-btn {
+  width: 32px;
+  height: 32px;
+  font-size: 1.2em;
+  padding: 0;
+  margin: 2px;
+  margin-left: 40px;  /* ← 增加左右间距（你可以调整值试试看） */
+  border: none;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #333;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+  background-color: #e0f0ff;
+  transform: scale(1.05);
+}
+@media (max-width: 360px) {
+  .player {
+    padding: 8px;
+    font-size: 0.9em;
+  }
+}
+    
   </style>
+
 <script>
 let isDay = true;
 let nextToggle = true;
@@ -156,7 +213,9 @@ function addSection(playerId, sectionType, sectionName, emoji, defaultValue) {
     <button onclick="update('${sectionType}-${playerId}-${idx}', -1, 6)">−</button>
     <input type="number" min="0" max="6" value="${defaultValue}" class="value-input" id="${sectionType}-${playerId}-${idx}">
     <button onclick="update('${sectionType}-${playerId}-${idx}', 1, 6)">+</button>
-    <button onclick="this.parentNode.remove()">❌</button>
+    <button class="action-btn" onclick="this.parentNode.remove()">❌</button>
+
+
   `;
   container.appendChild(div);
 }
