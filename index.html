@@ -210,9 +210,9 @@ function addSection(playerId, sectionType, sectionName, emoji, defaultValue) {
   const idx = container.children.length;
   div.innerHTML = `
     <span class="label">${emoji} ${sectionName}:</span>
-    <button onclick="update('${sectionType}-${playerId}-${idx}', -1, 6)">−</button>
-    <input type="number" min="0" max="6" value="${defaultValue}" class="value-input" id="${sectionType}-${playerId}-${idx}">
-    <button onclick="update('${sectionType}-${playerId}-${idx}', 1, 6)">+</button>
+    <button onclick="update('${sectionType}-${playerId}-${idx}', -1, 2048)">−</button>
+    <input type="number" min="0" max="2048" value="${defaultValue}" class="value-input" id="${sectionType}-${playerId}-${idx}">
+    <button onclick="update('${sectionType}-${playerId}-${idx}', 1, 2048)">+</button>
     <button class="action-btn" onclick="this.parentNode.remove()">❌</button>
 
 
