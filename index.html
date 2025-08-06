@@ -425,14 +425,15 @@ function addSection(playerId, sectionType, sectionName, emoji, defaultValue) {
     🔁 Restart Game
   </button>
 </div>
-<audio id="click-sound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_b0b2e878c7.mp3"></audio>
+<audio id="click-sound" src="button-click.wav"></audio>
+
+<button onclick="playSound()">Next</button>
+
 <script>
 function playSound() {
-  const audio = document.getElementById('click-sound');
-  if (audio) {
-    audio.currentTime = 0;
-    audio.play();
-  }
+  const sound = document.getElementById('click-sound');
+  sound.currentTime = 0;  // 确保每次都从头播放
+  sound.play();
 }
 </script>
 
