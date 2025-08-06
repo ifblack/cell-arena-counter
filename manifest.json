@@ -1,6 +1,6 @@
 {
   "name": "Cell Arena ATP Counter",
-  "short_name": "ATP Counter",
+  "short_name": "Cell Arena",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f8fbff",
