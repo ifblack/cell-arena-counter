@@ -56,3 +56,5 @@ Eric 「G7 -（2024~2025）」
 
 ···························
 "Oooooooo, SciArena, victory is ours!"
+
+![ATP Counter Screenshot](./yx-ATP-s.png)
