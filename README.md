@@ -21,6 +21,8 @@ A simple mobile-friendly web tool for tracking ATP and Glucose levels in a biolo
 
 # Cell Arena ATP Counter 「Introduction」
 
+![ATP Counter Screenshot](./cell.png)
+
 ### Creative Concept 
 "Cell Arena: ATP Racing" is a card game that combines scientific education, strategic competition, and visual aesthetics. The game depicts the biological process of ATP (adenosine triphosphate) reactions, aiming to help children and teenagers understand cellular science, stimulate their interest in biology, and explore the micro world.
 
