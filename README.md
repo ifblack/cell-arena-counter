@@ -17,7 +17,7 @@ A simple mobile-friendly web tool for tracking ATP and Glucose levels in a biolo
 2. Add to Home Screen (iOS: Safari, Android: Chrome).
 3. Launch and enjoy full-screen app experience.
 
-————————————————————————————————————————————————————
+———————————————————————————————————————
 
 # Cell Arena ATP Counter 「Introduction」
 
@@ -54,7 +54,7 @@ Eric 「G7 -（2024~2025）」
 
 
 
-————————————————————————————————————————————————————
+———————————————————————————————————————
 
 "Oooooooo, SciArena, victory is ours!"
 
