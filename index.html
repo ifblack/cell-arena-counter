@@ -18,8 +18,7 @@
 <meta name="theme-color" content="#1a2c43">
 <!-- 视图设置 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-<style>
+ <style>
     body {
     font-family: "Segoe UI", sans-serif;
     margin: 0;                         /* 建议取消 body 外边距 */
@@ -130,7 +129,7 @@ function resetGame() {
     document.getElementById('atp' + i).value = 20;
     document.getElementById('glu' + i).value = 0;
 
-    const sections = ['mito', 'cell', 'infect', 'immune'];
+    const sections = ['mito', 'cell', 'infectA', 'infectB', 'immune'];
     sections.forEach(sec => {
       const container = document.getElementById(sec + '-container-' + i);
       if (container) container.innerHTML = '';
@@ -173,43 +172,6 @@ function updateLeaderboard() {
 }
 setInterval(updateLeaderboard, 1000);
 
-
-function updateLeaderboard() {
-  const players = [];
-  for (let i = 1; i <= 6; i++) {
-    const name = document.getElementById('p' + i + '_name');
-    const atp = document.getElementById('atp' + i);
-    const glu = document.getElementById('glu' + i);
-    if (name && atp && glu) {
-      players.push({
-        id: i,
-        fullName: name.value,
-        name: name.value.length > 10 ? name.value.substring(0, 10) + '…' : name.value,
-        atp: parseInt(atp.value),
-        glu: parseInt(glu.value)
-      });
-    }
-  }
-  players.sort((a, b) => b.atp - a.atp);
-  const board = document.getElementById('leaderboard');
-  board.innerHTML = '<h3>🏆 Leaderboard</h3>';
-  const champ = players[0];
-  board.innerHTML += `
-    <div style="margin:8px 0; font-family:monospace;">
-      👑 <b>${champ.fullName}</b><br>
-      ⚡ ATP: ${champ.atp} | 🍞 Glucose: ${champ.glu}
-    </div>`;
-  board.innerHTML += players.map((p, i) => `
-    <div style="display: grid; grid-template-columns: 160px 1fr 40px; font-family:monospace; align-items:center; margin:2px 0;">
-      <div style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">#${i + 1} ${p.name}</div>
-      <div style="text-align:right;">ATP ${p.atp.toString().padStart(3)} | Glu ${p.glu.toString().padStart(3)}</div>
-      <div>🏅</div>
-    </div>`
-  ).join("");
-}
-setInterval(updateLeaderboard, 1000);
-
-
 function addSection(playerId, sectionType, sectionName, emoji, defaultValue) {
   const containerId = sectionType + '-container-' + playerId;
   const container = document.getElementById(containerId);
@@ -227,15 +189,33 @@ function addSection(playerId, sectionType, sectionName, emoji, defaultValue) {
     <input type="number" min="0" max="2048" value="${defaultValue}" class="value-input" id="${sectionType}-${playerId}-${idx}">
     <button onclick="update('${sectionType}-${playerId}-${idx}', 1, 2048)">+</button>
     <button class="action-btn" onclick="this.parentNode.remove()">❌</button>
-
-
   `;
   container.appendChild(div);
 }
 
+function playSound() {
+  const audio = document.getElementById('click-sound');
+  if (audio) {
+    audio.currentTime = 0;
+    audio.play();
+  }
+}
+
 </script>
 </head>
-<body style=" max-width: 750px; margin: 0 auto;">
+<body style=" max-width: 1250px; margin: 0 auto;">
+<!-- 顶部导航区域 -->
+<div style="background:#f0f0f0; padding: 10px; text-align:center;">
+  <a href="https://mp.weixin.qq.com/s/echWb-6CIUU1hnVUyQiF0A" target="_blank"
+     style="margin: 0 10px; font-size:14px; color:#333; text-decoration:none;">📄 Manual</a>
+  <a href="https://mp.weixin.qq.com/s/4R_AuXsxTG752rNBpNUALQ" target="_blank"
+     style="margin: 0 10px; font-size:14px; color:#333; text-decoration:none;">📜 Rules</a>
+  <a href="https://mp.weixin.qq.com/s/6rHPx3pbmoM_bQaaHwhe7A" target="_blank"
+     style="margin: 0 10px; font-size:14px; color:#333; text-decoration:none;">🧭 Guide</a>
+  <a href="https://mp.weixin.qq.com/s/FKWpYsSEOCHACpNHa_Zgwg" target="_blank"
+     style="margin: 0 10px; font-size:14px; color:#333; text-decoration:none;">ℹ️ About</a>
+</div>
+
 <h1>🧪 Cell Arena ATP Counter</h1>
 <div style="text-align:center; margin-bottom: 12px;">
 <span id="label-turn" style="font-weight:bold;">Turn:</span>
@@ -425,22 +405,15 @@ function addSection(playerId, sectionType, sectionName, emoji, defaultValue) {
     🔁 Restart Game
   </button>
 </div>
+<audio id="click-sound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_b0b2e878c7.mp3"></audio>
 
-
-</script>
-
-<!-- 新增底部区域 -->
-<div style="height:100px; background:#f0f0f0; margin-top:50px; text-align:center; padding-top:10px;">
-  <p style="font-size:16px; font-weight:bold; color:#555; margin-bottom:8px;">Resources:</p>
-  <a href="https://mp.weixin.qq.com/s/echWb-6CIUU1hnVUyQiF0A" target="_blank"
-     style="margin: 0 10px; font-size:14px; color:#333; text-decoration:none;">📄 Manual</a>
-  <a href="https://mp.weixin.qq.com/s/4R_AuXsxTG752rNBpNUALQ" target="_blank"
-     style="margin: 0 10px; font-size:14px; color:#333; text-decoration:none;">📜 Rules</a>
-  <a href="https://mp.weixin.qq.com/s/6rHPx3pbmoM_bQaaHwhe7A" target="_blank"
-     style="margin: 0 10px; font-size:14px; color:#333; text-decoration:none;">🧭 Guide</a>
-  <a href="https://mp.weixin.qq.com/s/FKWpYsSEOCHACpNHa_Zgwg" target="_blank"
-     style="margin: 0 10px; font-size:14px; color:#333; text-decoration:none;">ℹ️ About</a>
-</div>
-  
+<div style="height:70px; background:#f0f0f0; margin-top:10px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+  <p style="font-size:16px; font-weight:bold; color:#555; margin: 0;">Cell Arena Team</p>
+  <div style="margin-top: 4px;">
+    <a href="mailto:sciarena.team@gmail.com"
+      style="margin: 0 10px; font-size:14px; color:#333; text-decoration:none;">📧 Email</a>
+    <a href="https://www.sciarenalabs.com/" target="_blank"
+      style="margin: 0 10px; font-size:14px; color:#333; text-decoration:none;">🌐 Official Website</a>
+  </div>
 </body>
 </html>
