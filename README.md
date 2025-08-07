@@ -41,7 +41,7 @@ Hank and Eric, through their learning of traditional biology content, realized t
 The game not only provides engaging content but also encourages students to visualize biological principles, laying a solid foundation for their future academic journeys.
 
 ### Creative Team 
-
+![ATP Counter Screenshot](./H&E-02.png)
 Hank「G11 -（2024~2025）」
 2025 USABO Top 20%
 2024 BBO Gold Medal
