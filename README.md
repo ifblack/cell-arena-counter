@@ -42,12 +42,15 @@ The game not only provides engaging content but also encourages students to visu
 
 ### Creative Team 
 ![ATP Counter Screenshot](./H&E-02-s.png)
+
 Hank「G11 -（2024~2025）」
+
 2025 USABO Top 20%
 2024 BBO Gold Medal
 2023 UKCHO Silver Medal
 
 Eric 「G7 -（2024~2025）」
+
 2025 USABO Top 20%
 2025 IPC Gold Medal
 2024 UKBC Gold Medal
@@ -58,4 +61,4 @@ Eric 「G7 -（2024~2025）」
 
 "Oooooooo, SciArena, victory is ours!"
 
-![ATP Counter Screenshot](./yx-ATP-s.png)
+![ATP Counter Screenshot](./yx-ATP-ss.png)
