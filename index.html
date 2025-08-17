@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +24,7 @@
   .wrapper { width:100%; display:flex; flex-direction:column; align-items:center; padding:10px; }
 
   .panel, .player {
-    width:400px;
+    width: 420px;
     margin:14px auto;
     background:#fff;
     border:2px solid var(--border);
@@ -165,10 +164,10 @@
   .modal .actions { display:flex; justify-content:flex-end; gap:10px; margin-top:12px; }
   .btn-ghost { background:#f5f5f5; color:#333; border:none; border-radius:8px; padding:8px 12px; cursor:pointer; }
 
-/* === Long-press (2000ms) drag to reorder on blank area === */
+/* === Long-press drag to reorder === */
 .player.dragging {
   position: absolute !important;
-  width: 400px; /* keep card width consistent */
+  width: 420px;
   transform: scale(1.01);
   box-shadow: 0 14px 30px rgba(16,24,40,.28) !important;
   cursor: grabbing !important;
@@ -190,9 +189,7 @@
   100% { box-shadow: 0 0 0 0 rgba(25,118,210,0.0); }
 }
 
-
-/* === Long-press tip bubble === */
-.player { position: relative; } /* allow absolute-positioned tip */
+.player { position: relative; }
 .player .hold-tip {
   position: absolute;
   left: 50%;
@@ -225,10 +222,7 @@
   to   { opacity: 1; transform: translate(-50%, -100%); }
 }
 
-
-
-
-/* === Glass Buttons v3.8 === */
+/* === Glass Buttons === */
 .glass-btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:10px 16px;border-radius:14px;font-weight:700;letter-spacing:.2px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.10);color:#fff;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:inset 1px 1px 3px rgba(255,255,255,.18),inset -1px -1px 3px rgba(0,0,0,.18),0 4px 12px rgba(0,0,0,.22);cursor:pointer;transition:transform .2s ease,box-shadow .3s ease,background .3s ease,border-color .3s ease;}
 .glass-btn.green{background:radial-gradient(140% 140% at 30% 20%,rgba(60,190,110,.85) 0%,rgba(30,150,70,.85) 60%,rgba(18,92,42,.9) 100%);border-color:rgba(30,150,70,.45);box-shadow:0 0 0 2px rgba(80,230,140,.25) inset,0 8px 20px rgba(18,92,42,.45),0 2px 12px rgba(0,0,0,.18)}
 .glass-btn.green:hover{background:radial-gradient(140% 140% at 30% 20%,rgba(60,200,115,.92) 0%,rgba(30,160,75,.92) 60%,rgba(18,92,42,.95) 100%);box-shadow:0 0 0 3px rgba(80,230,140,.32) inset,0 12px 28px rgba(18,92,42,.55),0 4px 16px rgba(0,0,0,.22);transform:translateY(-1px)}
@@ -237,12 +231,22 @@
 .glass-btn.circle{width:78px;height:78px;border-radius:50%;font-size:1.05rem;font-weight:800;line-height:1;padding:0}
 .glass-btn.circle.green:hover{animation:breathe 1.6s ease-in-out infinite}
 @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
-.center-row{display:flex;justify-content:center;align-items:center;gap:10px}
+.center-row{display:flex;justify-content:center;align-items:center;gap:10px; margin-top: 24px; }
+
+/* === Fixed width buttons for Add Player / Restart Game === */
+.cta {
+  width: 160px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+}
 
 </style>
 </head>
 
-<bodystyle=" max-width: 1250px; margin: 0 auto;">
+<body style="max-width: 1250px; margin: 0 auto;">
   <!-- 顶部导航区域 -->
 <div style="background:#f0f0f0; padding: 10px; text-align:center;">
   <a href="https://mp.weixin.qq.com/s/echWb-6CIUU1hnVUyQiF0A" target="_blank"
@@ -266,7 +270,7 @@
   </div>
 
   
-<div class="center-row"><div class="center-row"><button class="circle btn-glass btn-glass--green-circle btn-glass btn-glass--green-circle glass-btn circle green" onclick="playSound(); nextTurn()"  id="next-btn">Next</button></div></div>
+<div class="center-row"><button class="circle glass-btn circle green" id="next-btn">Next</button></div>
 
 
   <div class="wrapper">
@@ -311,7 +315,7 @@
           <button class="icon-btn">🧬</button>
           <button class="icon-btn">🔬</button>
           <button class="icon-btn exp-core">🦠</button>
-          <button class="icon-btn exp-core">☣︎</button>
+          <button class="icon-btn exp-core">☣️</button>
           <button class="icon-btn exp-core">🛡️</button>
           <button class="icon-btn expansion">☁️</button>
           <button class="icon-btn expansion">🔥</button>
@@ -334,12 +338,12 @@
     </div>
 
     <div style="text-align:center; margin-top:8px;">
-      <button id="add-player-btn" class="primary glass-btn green" class="btn-glass btn-glass--clear" class="btn-glass btn-glass--clear" class="btn-glass btn-glass--clear" onclick="addPlayer()">➕ Add Player</button>
+      <button id="add-player-btn" class="primary glass-btn green cta">➕ Add Player</button>
     </div>
   </div>
 
   <div style="text-align:center; margin: 18px;">
-    <button id="reset-btn" class="btn-danger glass-btn red" class="btn-glass btn-glass--red" onclick="resetGame()">🔁 Restart Game</button>
+    <button id="reset-btn" class="btn-danger glass-btn red cta">🔁 Restart Game</button>
   </div>
 
   <div id="confirm-mask" class="modal-mask" role="dialog" aria-modal="true">
@@ -367,622 +371,776 @@
   </div>
 
   <script>
-  (function(){
-    let isDay = true;
-    let confirmTarget = null;
-    let expansionOn = true;
+  // Global variables
+  window.isDay = true;
+  window.confirmTarget = null;
+  window.expansionOn = true;
 
-    const avatarList = ['👤','🐱','🐶','🐼','🦊','🐻','🦁','🐯','🐵','🐰','🐮','🐨','🧙','⚔️','🛡️'];
-    function bindAvatar(card){
-      const avatar = card.querySelector('.avatar');
-      if(!avatar) return;
-      avatar.addEventListener('click', ()=>{
-        const curr = avatar.textContent;
-        const idx = avatarList.indexOf(curr);
-        const next = avatarList[(idx+1+avatarList.length)%avatarList.length];
-        avatar.textContent = next;
-      });
+  const avatarList = ['👤','🐱','🐶','🐼','🦊','🐻','🦆','🐯','🐵','🐰','🐮','🐨','🧙','⚔️','🛡️'];
+
+  // Utility functions
+  function rnd(min, max){ return Math.floor(Math.random()*(max-min+1))+min; }
+  function randomPastel(){ const h=rnd(0,360), s=rnd(45,65), l=rnd(88,95); return `hsl(${h} ${s}% ${l}%)`; }
+
+  function playSound() {
+    const audio = document.getElementById('click-sound');
+    if(audio){ 
+      audio.currentTime = 0;
+      audio.play().catch(e => console.log('Audio play failed:', e));
     }
-
-    function rnd(min, max){ return Math.floor(Math.random()*(max-min+1))+min; }
-    function randomPastel(){ const h=rnd(0,360), s=rnd(45,65), l=rnd(88,95); return `hsl(${h} ${s}% ${l}%)`; }
-    function bindPaintButton(card){
-      const paintBtn = card.querySelector('.paint-btn');
-      if(!paintBtn) return;
-      let pressTimer = null, longPressed = false;
-      function clearTimer(){ if(pressTimer){ clearTimeout(pressTimer); pressTimer=null; } }
-      paintBtn.addEventListener('mousedown', ()=>{
-        longPressed=false; pressTimer=setTimeout(()=>{ longPressed=true; card.style.background='#ffffff'; },600);
-      });
-      paintBtn.addEventListener('mouseup', ()=>{ if(!longPressed){ card.style.background = randomPastel(); } clearTimer(); });
-      paintBtn.addEventListener('mouseleave', clearTimer);
-      paintBtn.addEventListener('touchstart', ()=>{
-        longPressed=false; pressTimer=setTimeout(()=>{ longPressed=true; card.style.background='#ffffff'; },600);
-      }, {passive:true});
-      paintBtn.addEventListener('touchend', ()=>{ if(!longPressed){ card.style.background = randomPastel(); } clearTimer(); });
-      paintBtn.addEventListener('touchcancel', clearTimer);
-    }
-
-    function changeAdjacentInput(btn, delta, max=2048){
-      const row = btn.closest('.counter');
-      const input = row ? row.querySelector('input.value-input') : null;
-      if(!input) return;
-      let v = parseInt(input.value); v = isNaN(v) ? 0 : v;
-      input.value = Math.max(0, Math.min(max, v+delta));
-    }
-
-    function toolbarButton(label, emoji, sectionType, def, classes) {
-      const b = document.createElement('button');
-      b.className = 'icon-btn ' + (classes || '');
-      b.textContent = emoji;
-      b.title = label;
-      b.addEventListener('click', function(){
-        const card = b.closest('.player');
-        const section = card && card.querySelector('.section[data-type="'+sectionType+'"]');
-        if(!section) return;
-        const existingRows = section.querySelectorAll('.counter').length;
-        if(existingRows >= 3) return;
-        const div = document.createElement('div');
-        div.className = 'counter';
-        const labelHtml = '<span class="label">'+(sectionType==='coop' ? '🤝 Cooperation' : (emoji+' '+label))+'</span>';
-        div.innerHTML = labelHtml +
-                        '<button class="pm minus">−</button>' +
-                        '<input type="number" min="0" max="2048" value="'+def+'" class="value-input">' +
-                        '<button class="pm plus">+</button>' +
-                        '<button class="remove-btn" title="Delete">❌</button>';
-        section.appendChild(div);
-        const minus = div.querySelector('button.minus');
-        const plus  = div.querySelector('button.plus');
-        const removeBtn = div.querySelector('button.remove-btn');
-        minus.addEventListener('click', ()=>changeAdjacentInput(minus,-1,2048));
-        plus.addEventListener('click', ()=>changeAdjacentInput(plus,1,2048));
-        removeBtn.addEventListener('click', ()=>div.remove());
-      });
-      return b;
-    }
-
-    function applyExpansionVisibility(){
-      const expBtns = document.querySelectorAll('.toolbar .expansion, .toolbar .exp-core');
-      expBtns.forEach(btn => {
-        if(expansionOn) btn.classList.remove('hidden');
-        else btn.classList.add('hidden');
-      });
-      const toggle = document.getElementById('expansion-toggle');
-      if(toggle){
-        toggle.textContent = expansionOn ? 'ON' : 'OFF';
-        toggle.classList.toggle('on', expansionOn);
-        toggle.classList.toggle('off', !expansionOn);
-      }
-    }
-
-    function bindPlayerCard(card){
-      const upBtn   = card.querySelector('.reorder .icon-mini[title="Move up"]');
-      const downBtn = card.querySelector('.reorder .icon-mini[title="Move down"]');
-      const delBtn  = card.querySelector('.reorder .icon-mini[title="Delete player"]');
-      const paintBtn= card.querySelector('.reorder .paint-btn');
-
-      if(upBtn) upBtn.addEventListener('click', ()=>moveCard(card, -1));
-      if(downBtn) downBtn.addEventListener('click', ()=>moveCard(card, 1));
-      if(delBtn) delBtn.addEventListener('click', ()=>{ confirmTarget = card; openConfirm(); });
-      if(paintBtn) bindPaintButton(card);
-
-      bindAvatar(card);
-
-      const coreRows = card.querySelectorAll('.counter[data-core="1"]');
-      coreRows.forEach(row=>{
-        const btns = row.querySelectorAll('button.pm');
-        if(btns.length===2){
-          const [minus, plus] = [btns[0], btns[1]];
-          const isATP = !!row.querySelector('.atp');
-          minus.addEventListener('click', ()=>changeAdjacentInput(minus,-1, isATP?999:2048));
-          plus.addEventListener('click',  ()=>changeAdjacentInput(plus, 1, isATP?999:2048));
-        }
-      });
-
-      const toolbar = card.querySelector('.toolbar');
-      if(toolbar){
-        toolbar.innerHTML = '';
-        [
-          ['Mitosis','🧬','mito',5,''],
-          ['Cell','🔬','cell',1,''],
-          ['Acute','🦠','infectA',3,'exp-core'],
-          ['Chronic','☣︎','infectB',5,'exp-core'],
-          ['Immune','🛡️','immune',2,'exp-core'],
-          ['Overcast','☁️','overcast',2,'expansion'],
-          ['DrySeason','🔥','dry',2,'expansion'],
-          ['IceAge','🧊','ice',4,'expansion'],
-          ['Parasitism','👾','para',1,'expansion'],
-          ['Cooperation','🤝','coop',2,'expansion'],
-        ].forEach(args=> toolbar.appendChild(toolbarButton(...args)));
-      }
-      applyExpansionVisibility();
-    }
-
-    function moveCard(card, dir){
-      const container = document.getElementById('players-container');
-      if(!container) return;
-      const cards = Array.from(container.querySelectorAll('.player'));
-      const i = cards.indexOf(card);
-      const j = i + dir;
-      if(j<0 || j>=cards.length) return;
-      container.removeChild(card);
-      if(dir<0){ container.insertBefore(card, cards[j]); }
-      else {
-        if(cards[j].nextSibling) container.insertBefore(card, cards[j].nextSibling);
-        else container.appendChild(card);
-      }
-      reindex();
-    }
-
-    function openConfirm(){ const mask = document.getElementById('confirm-mask'); if(mask) mask.style.display = 'flex'; }
-    function closeConfirm(){ const mask = document.getElementById('confirm-mask'); if(mask) mask.style.display = 'none'; confirmTarget = null; }
-
-    function reindex(){
-      const container = document.getElementById('players-container');
-      if(!container) return;
-      const cards = Array.from(container.querySelectorAll('.player'));
-      cards.forEach((c, i)=>{
-        c.setAttribute('data-player', String(i+1));
-        const nameInput = c.querySelector('input.player-name');
-        if(nameInput && /^Player\s*\d*$/.test((nameInput.value||'').trim())){
-          nameInput.value = 'Player ' + (i+1);
-        }
-      });
-      updateAddPlayerButton();
-    }
-
-    function addPlayer(){
-      const container = document.getElementById('players-container');
-      if(!container) return;
-      const count = container.querySelectorAll('.player').length;
-      if(count >= 6){ alert('Up to 6 players'); return; }
-      const card = createEmptyCard();
-      container.appendChild(card);
-      bindPlayerCard(card);
-      reindex();
-    }
-
-    function createEmptyCard(){
-      const card = document.createElement('div');
-      card.className = 'player';
-      card.innerHTML = [
-        '<div class="player-header">',
-          '<div class="player-title">',
-            '<h2 class="avatar" title="Click to change avatar">👤</h2>',
-            '<input class="player-name" value="Player " />',
-          '</div>',
-          '<div class="reorder">',
-            '<button class="icon-mini paint-btn" title="Click: random color • Long press: reset to white">🎨</button>',
-            '<button class="icon-mini" title="Delete player">🗑️</button>',
-          '</div>',
-        '</div>',
-        '<div class="counter" data-core="1">',
-          '<span class="label">⚡ ATP</span>',
-          '<button class="pm">−</button>',
-          '<input class="value-input atp" max="999" min="0" type="number" value="20"/>',
-          '<button class="pm">+</button>',
-        '</div>',
-        '<div class="counter" data-core="1">',
-          '<span class="label">🍞 Glucose</span>',
-          '<button class="pm">−</button>',
-          '<input class="value-input glu" max="999" min="0" type="number" value="0"/>',
-          '<button class="pm">+</button>',
-        '</div>',
-        '<div class="toolbar"></div>',
-        '<div class="section" data-type="mito"></div>',
-        '<div class="section" data-type="cell"></div>',
-        '<div class="section" data-type="infectA"></div>',
-        '<div class="section" data-type="infectB"></div>',
-        '<div class="section" data-type="immune"></div>',
-        '<div class="section" data-type="overcast"></div>',
-        '<div class="section" data-type="dry"></div>',
-        '<div class="section" data-type="ice"></div>',
-        '<div class="section" data-type="para"></div>',
-        '<div class="section" data-type="coop"></div>',
-      ].join('');
-      return card;
-    }
-
-    function updateLeaderboard(){
-      const board = document.getElementById('leaderboard');
-      const container = document.getElementById('players-container');
-      if(!board || !container) return;
-      const cards = Array.from(container.querySelectorAll('.player'));
-      if(cards.length===0){
-        board.innerHTML = '<div class="lb-head">'+
-          '<div class="lb-title"><h3>🏆 Leaderboard</h3></div>'+
-          '<div class="toggle-wrap"><span>WTDGAP Expansion Pack</span><button id="expansion-toggle" class="toggle-btn '+(expansionOn?'on">ON':'off">OFF')+'</button></div>'+
-          '</div><div>No players</div>';
-        bindExpansionToggle();
-        return;
-      }
-      const players = cards.map((card,i)=>{
-        const name = (card.querySelector('input.player-name')?.value || ('Player '+(i+1))).trim();
-        const avatar = (card.querySelector('.avatar')?.textContent || '👤').trim();
-        const atp = parseInt(card.querySelector('input.atp')?.value) || 0;
-        const glu = parseInt(card.querySelector('input.glu')?.value) || 0;
-        const bg = (card.style.background && card.style.background.trim()) || '#ffffff';
-        return {name, avatar, atp, glu, bg};
-      }).sort((a,b)=> b.atp-a.atp || b.glu-a.glu);
-      const champ = players[0];
-
-      function chipStyles(bg){ return 'style="background:'+bg+';"'; }
-
-      board.innerHTML =
-        '<div class="lb-head">'+
-          '<div class="lb-title"><h3>🏆 Leaderboard</h3></div>'+
-          '<div class="toggle-wrap"><span>WTDGAP Expansion Pack</span><button id="expansion-toggle" class="toggle-btn '+(expansionOn?'on">ON':'off">OFF')+'</button></div>'+
-        '</div>' +
-        // Champion section: NO rank pill, bigger name chip, stats on right
-        '<div class="champ-row">'+
-          '<div class="champ-left">'+
-            '<span class="chip-btn big" '+chipStyles(champ.bg)+' title="Champion">'+champ.avatar+' <b class="name-text">'+champ.name+'</b></span>'+
-          '</div>'+
-          '<div class="champ-right">⚡ '+champ.atp+' &nbsp; | &nbsp; 🍞 '+champ.glu+'</div>'+
-        '</div>'+
-        '<hr class="lb-divider" />' +
-        // List
-        players.map((p,i)=>
-          '<div class="row">'+
-            '<div class="namecell">'+
-              '<span class="pill-btn" '+chipStyles(p.bg)+' title="Rank '+(i+1)+'">'+(i+1)+'</span> '+
-              '<span class="chip-btn" '+chipStyles(p.bg)+' title="Player">'+p.avatar+' <b class="name-text">'+p.name+'</b></span>'+
-            '</div>'+
-            '<div style="text-align:right;">ATP '+String(p.atp).padStart(3)+' | Glu '+String(p.glu).padStart(3)+'</div>'+
-            '<div>🏅</div>'+
-          '</div>'
-        ).join('');
-
-      bindExpansionToggle();
-    }
-
-    function bindExpansionToggle(){
-      const btn = document.getElementById('expansion-toggle');
-      if(!btn) return;
-      btn.addEventListener('click', ()=>{
-        expansionOn = !expansionOn;
-        applyExpansionVisibility();
-        updateLeaderboard();
-      });
-    }
-
-    function updateAddPlayerButton(){
-      const container = document.getElementById('players-container');
-      const btn = document.getElementById('add-player-btn');
-      if(!container || !btn) return;
-      const count = container.querySelectorAll('.player').length;
-      if(count>=6){ btn.disabled=true; btn.textContent='Player cap reached (6)'; }
-      else { btn.disabled=false; btn.textContent='➕ Add Player'; }
-    }
-
-    function resetGame(){
-      const turn = document.getElementById('turn'); if(turn) turn.value = 1;
-      const day = document.getElementById('daynight'); if(day) day.textContent = '🌞 Day';
-      isDay = true;
-      const container = document.getElementById('players-container');
-      if(container){
-        const cards = Array.from(container.querySelectorAll('.player'));
-        cards.forEach((card,i)=>{
-          const atp = card.querySelector('input.atp'); if(atp) atp.value = 20;
-          const glu = card.querySelector('input.glu'); if(glu) glu.value = 0;
-          card.querySelectorAll('.section').forEach(sec=> sec.innerHTML='');
-          const name = card.querySelector('input.player-name');
-          if(name && /^Player\s*\d*$/.test((name.value||'').trim())) name.value = 'Player ' + (i+1);
-          /* keep player card background color (do not reset) */
-        });
-      }
-      reindex();
-    }
-
-    document.getElementById('add-player-btn')?.addEventListener('click', addPlayer);
-    document.getElementById('reset-btn')?.addEventListener('click', resetGame);
-    document.getElementById('switch-btn')?.addEventListener('click', function(){
-      isDay = !isDay;
-      const day = document.getElementById('daynight');
-      if(day) day.textContent = isDay ? '🌞 Day' : '🌙 Night';
-    });
-    document.getElementById('next-btn')?.addEventListener('click', function(){
-      const turn = document.getElementById('turn');
-      if(turn) turn.value = (parseInt(turn.value)||1) + 1;
-      const day = document.getElementById('daynight');
-      if(day) day.textContent = isDay ? '🌙 Night' : '🌞 Day';
-      isDay = !isDay;
-      const audio = document.getElementById('click-sound'); if(audio){ audio.currentTime=0; audio.play(); }
-    });
-
-    const firstCard = document.querySelector('#players-container .player');
-    if(firstCard) { bindPlayerCard(firstCard); }
-    reindex();
-    updateAddPlayerButton();
-    applyExpansionVisibility();
-    updateLeaderboard();
-    setInterval(updateLeaderboard, 800);
-
-    document.getElementById('confirm-no')?.addEventListener('click', closeConfirm);
-    document.getElementById('confirm-yes')?.addEventListener('click', function(){
-      if(confirmTarget && confirmTarget.parentElement) confirmTarget.parentElement.removeChild(confirmTarget);
-      closeConfirm();
-      reindex();
-    });
-  })();
-  </script>
-
-<script>
-(function(){
-  function isInteractive(node){
-    return !!(node && (
-      node.closest('button, input, select, textarea, a, .icon-btn, .pm, .paint-btn, .toolbar, .reorder, .value-input')
-    ));
   }
 
-  function enableLongPressDrag(container){
-    let dragging = null, placeholder = null;
-    let startY = 0, startTop = 0, startRect = null;
-    let pressTimer = null, holdMs = 2000;
-    let downScrollY = 0, startClientY = 0;
-    const moveThreshold = 6; // px
-
-    function startDrag(card){
-      const scrollY = window.scrollY || window.pageYOffset;
-      startRect = card.getBoundingClientRect();
-      placeholder = document.createElement('div');
-      placeholder.className = 'player placeholder';
-      placeholder.style.setProperty('--ph', startRect.height+'px');
-      container.insertBefore(placeholder, card.nextSibling);
-
-      card.classList.remove('hold-hint');
-      card.classList.add('dragging');
-      card.style.left = (startRect.left)+'px';
-      card.style.top  = (startRect.top + scrollY)+'px';
-      card.style.pointerEvents = 'none';
-
-      dragging = card;
-      startY = startClientY + scrollY;
-      startTop = startRect.top + scrollY;
-
-      document.addEventListener('pointermove', onPointerMove);
-      document.addEventListener('pointerup', onPointerUp, { once: true });
-    }
-
-    function clearTimer(card){
-      if(pressTimer){ clearTimeout(pressTimer); pressTimer = null; }
-      if(card){ card.classList.remove('hold-hint'); }
-    }
-
-    function onPointerDown(e){
-      const card = e.target.closest('.player');
-      if(!card || !container.contains(card)) return;
-      // 仅空白区域触发：跳过交互控件
-      if(isInteractive(e.target)) return;
-
-      startClientY = e.clientY;
-      downScrollY = (window.scrollY || window.pageYOffset);
-
-      // 给出长按提示
-      card.classList.add('hold-hint');
-
-      pressTimer = setTimeout(function(){
-        // 静止检测：滚动或移动超过阈值则取消
-        const moved = Math.abs((window.scrollY||window.pageYOffset) - downScrollY) > moveThreshold;
-        if(!moved){
-          startDrag(card);
-          e.preventDefault();
-        } else {
-          clearTimer(card);
-        }
-      }, holdMs);
-
-      // 监听移动，若移动过大则取消长按
-      function cancelOnMove(ev){
-        const dy = Math.abs(ev.clientY - startClientY);
-        if(dy > moveThreshold){
-          clearTimer(card);
-          container.removeEventListener('pointermove', cancelOnMove);
-          container.removeEventListener('pointerup', cancelHold);
-        }
-      }
-      function cancelHold(){
-        clearTimer(card);
-        container.removeEventListener('pointermove', cancelOnMove);
-        container.removeEventListener('pointerup', cancelHold);
-      }
-      container.addEventListener('pointermove', cancelOnMove);
-      container.addEventListener('pointerup', cancelHold, { once: true });
-    }
-
-    function onPointerMove(e){
-      if(!dragging) return;
-      const scrollY = window.scrollY || window.pageYOffset;
-      const y = e.clientY + scrollY;
-      const dy = y - startY;
-      dragging.style.top = (startTop + dy) + 'px';
-
-      const cards = Array.from(container.querySelectorAll('.player')).filter(el=>el!==dragging && el!==placeholder);
-      for(const el of cards){
-        const r = el.getBoundingClientRect();
-        const center = r.top + scrollY + r.height/2;
-        if(y < center){
-          container.insertBefore(placeholder, el);
-          return;
-        }
-      }
-      container.appendChild(placeholder);
-    }
-
-    function onPointerUp(){
-      // 完成拖动
-      if(dragging){
-        container.insertBefore(dragging, placeholder);
-        dragging.classList.remove('dragging');
-        dragging.style.pointerEvents = '';
-        dragging.style.left = '';
-        dragging.style.top = '';
-        dragging = null;
-        if(placeholder && placeholder.parentNode){ placeholder.parentNode.removeChild(placeholder); }
-        placeholder = null;
-        if(typeof reindex === 'function') reindex();
-        if(typeof updateLeaderboard === 'function') updateLeaderboard();
-      }
-      // 清理计时器/事件
-      clearTimer();
-      document.removeEventListener('pointermove', onPointerMove);
-      document.removeEventListener('pointerup', onPointerUp);
-    }
-
-    container.addEventListener('pointerdown', onPointerDown);
+  function nextTurn() {
+    const turn = document.getElementById('turn');
+    if(turn) turn.value = (parseInt(turn.value)||1) + 1;
+    const day = document.getElementById('daynight');
+    if(day) day.textContent = window.isDay ? '🌙 Night' : '🌞 Day';
+    window.isDay = !window.isDay;
   }
 
-  document.addEventListener('DOMContentLoaded', function(){
-    const container = document.getElementById('players-container');
-    if(container) enableLongPressDrag(container);
-  });
-})();
+  function changeAdjacentInput(btn, delta, max=2048){
+    const row = btn.closest('.counter');
+    const input = row ? row.querySelector('input.value-input') : null;
+    if(!input) return;
+    let v = parseInt(input.value); v = isNaN(v) ? 0 : v;
+    input.value = Math.max(0, Math.min(max, v+delta));
+  }
+
+  function bindAvatar(card){
+    const avatar = card.querySelector('.avatar');
+    if(!avatar) return;
+    avatar.addEventListener('click', ()=>{
+      const curr = avatar.textContent;
+      const idx = avatarList.indexOf(curr);
+      const next = avatarList[(idx+1+avatarList.length)%avatarList.length];
+      avatar.textContent = next;
+    });
+  }
+
+  function bindPaintButton(card){
+    const paintBtn = card.querySelector('.paint-btn');
+    if(!paintBtn) return;
+    let pressTimer = null, longPressed = false;
+    function clearTimer(){ if(pressTimer){ clearTimeout(pressTimer); pressTimer=null; } }
+    paintBtn.addEventListener('mousedown', ()=>{
+      longPressed=false; pressTimer=setTimeout(()=>{ longPressed=true; card.style.background='#ffffff'; },600);
+    });
+    paintBtn.addEventListener('mouseup', ()=>{ if(!longPressed){ card.style.background = randomPastel(); } clearTimer(); });
+    paintBtn.addEventListener('mouseleave', clearTimer);
+    paintBtn.addEventListener('touchstart', ()=>{
+      longPressed=false; pressTimer=setTimeout(()=>{ longPressed=true; card.style.background='#ffffff'; },600);
+    }, {passive:true});
+    paintBtn.addEventListener('touchend', ()=>{ if(!longPressed){ card.style.background = randomPastel(); } clearTimer(); });
+    paintBtn.addEventListener('touchcancel', clearTimer);
+  }
+
+  function toolbarButton(label, emoji, sectionType, def, classes) {
+    const b = document.createElement('button');
+    b.className = 'icon-btn ' + (classes || '');
+    b.textContent = emoji;
+    b.title = label;
+    b.addEventListener('click', function(){
+      const card = b.closest('.player');
+      const section = card && card.querySelector('.section[data-type="'+sectionType+'"]');
+      if(!section) return;
+      const existingRows = section.querySelectorAll('.counter').length;
+      if(existingRows >= 3) return;
+      const div = document.createElement('div');
+      div.className = 'counter';
+      const labelHtml = '<span class="label">'+(sectionType==='coop' ? '🤝 Cooperation' : (emoji+' '+label))+'</span>';
+      div.innerHTML = labelHtml +
+                      '<button class="pm minus">−</button>' +
+                      '<input type="number" min="0" max="2048" value="'+def+'" class="value-input">' +
+                      '<button class="pm plus">+</button>' +
+                      '<button class="remove-btn" title="Delete">⌫</button>';
+      section.appendChild(div);
+      const minus = div.querySelector('button.minus');
+      const plus  = div.querySelector('button.plus');
+      const removeBtn = div.querySelector('button.remove-btn');
+      minus.addEventListener('click', ()=>changeAdjacentInput(minus,-1,2048));
+      plus.addEventListener('click', ()=>changeAdjacentInput(plus,1,2048));
+      removeBtn.addEventListener('click', ()=>div.remove());
+    });
+    return b;
+  }
+
+  function applyExpansionVisibility(){
+    const expBtns = document.querySelectorAll('.toolbar .expansion, .toolbar .exp-core');
+    expBtns.forEach(btn => {
+      if(window.expansionOn) btn.classList.remove('hidden');
+      else btn.classList.add('hidden');
+    });
+    const toggle = document.getElementById('expansion-toggle');
+    if(toggle){
+      toggle.textContent = window.expansionOn ? 'ON' : 'OFF';
+      toggle.classList.toggle('on', window.expansionOn);
+      toggle.classList.toggle('off', !window.expansionOn);
+    }
+  }
+
+  function bindPlayerCard(card){
+    const delBtn = card.querySelector('.reorder .icon-mini[title="Delete player"]');
+    const paintBtn = card.querySelector('.reorder .paint-btn');
+
+    if(delBtn) delBtn.addEventListener('click', ()=>{ window.confirmTarget = card; openConfirm(); });
+    if(paintBtn) bindPaintButton(card);
+
+    bindAvatar(card);
+
+    const coreRows = card.querySelectorAll('.counter[data-core="1"]');
+    coreRows.forEach(row=>{
+      const btns = row.querySelectorAll('button.pm');
+      if(btns.length===2){
+        const [minus, plus] = [btns[0], btns[1]];
+        const isATP = !!row.querySelector('.atp');
+        minus.addEventListener('click', ()=>changeAdjacentInput(minus,-1, isATP?999:2048));
+        plus.addEventListener('click',  ()=>changeAdjacentInput(plus, 1, isATP?999:2048));
+      }
+    });
+
+    const toolbar = card.querySelector('.toolbar');
+    if(toolbar){
+      
 </script>
-
-
 <script>
 (function(){
-  function isInteractive(node){
-    return !!(node && (
-      node.closest('button, input, select, textarea, a, .icon-btn, .pm, .paint-btn, .toolbar, .reorder, .value-input')
-    ));
+  // defaults
+  window.expansionOn = window.expansionOn ?? true;
+
+  function changeVal(input, delta, max){
+    var v = parseInt(input.value); if(isNaN(v)) v = 0;
+    input.value = Math.max(0, Math.min(max, v + delta));
   }
 
-  function enableLongPressDrag(container){
-    let dragging = null, placeholder = null;
-    let startY = 0, startTop = 0, startRect = null;
-    let pressTimer = null, holdMs = 1500; // ⏱ 1.5s
-    let downScrollY = 0, startClientY = 0;
-    const moveThreshold = 15; // px
-
-    function showTip(card){
-      removeTip(card);
-      const tip = document.createElement('div');
-      tip.className = 'hold-tip';
-      tip.textContent = 'Hold to drag…';
-      card.appendChild(tip);
-      return tip;
-    }
-    function removeTip(card){
-      if(!card) return;
-      const t = card.querySelector('.hold-tip');
-      if(t && t.parentNode) t.parentNode.removeChild(t);
-    }
-
-    function startDrag(card){
-      const scrollY = window.scrollY || window.pageYOffset;
-      startRect = card.getBoundingClientRect();
-      placeholder = document.createElement('div');
-      placeholder.className = 'player placeholder';
-      placeholder.style.setProperty('--ph', startRect.height+'px');
-      container.insertBefore(placeholder, card.nextSibling);
-
-      card.classList.remove('hold-hint');
-      removeTip(card);
-      card.classList.add('dragging');
-      card.style.left = (startRect.left)+'px';
-      card.style.top  = (startRect.top + scrollY)+'px';
-      card.style.pointerEvents = 'none';
-
-      dragging = card;
-      startY = startClientY + scrollY;
-      startTop = startRect.top + scrollY;
-
-      document.addEventListener('pointermove', onPointerMove);
-      document.addEventListener('pointerup', onPointerUp, { once: true });
-    }
-
-    function clearTimer(card){
-      if(pressTimer){ clearTimeout(pressTimer); pressTimer = null; }
-      if(card){ card.classList.remove('hold-hint'); removeTip(card); }
-    }
-
-    function onPointerDown(e){
-      const card = e.target.closest('.player');
-      if(!card || !container.contains(card)) return;
-      if(isInteractive(e.target)) return; // 点击到控件，放行
-
-      startClientY = e.clientY;
-      downScrollY = (window.scrollY || window.pageYOffset);
-
-      // 给出长按提示
-      card.classList.add('hold-hint');
-      showTip(card);
-
-      pressTimer = setTimeout(function(){
-        // 静止检测：垂直移动或滚动超过阈值则取消
-        const moved = Math.abs((window.scrollY||window.pageYOffset) - downScrollY) > moveThreshold;
-        if(!moved){
-          startDrag(card);
-          e.preventDefault();
-        } else {
-          clearTimer(card);
-        }
-      }, holdMs);
-
-      // 监听移动/松手，满足条件则取消长按
-      function cancelOnMove(ev){
-        const dy = Math.abs(ev.clientY - startClientY);
-        if(dy > moveThreshold){
-          clearTimer(card);
-          container.removeEventListener('pointermove', cancelOnMove);
-          container.removeEventListener('pointerup', cancelHold);
-        }
-      }
-      function cancelHold(){
-        clearTimer(card);
-        container.removeEventListener('pointermove', cancelOnMove);
-        container.removeEventListener('pointerup', cancelHold);
-      }
-      container.addEventListener('pointermove', cancelOnMove);
-      container.addEventListener('pointerup', cancelHold, { once: true });
-    }
-
-    function onPointerMove(e){
-      if(!dragging) return;
-      const scrollY = window.scrollY || window.pageYOffset;
-      const y = e.clientY + scrollY;
-      const dy = y - startY;
-      dragging.style.top = (startTop + dy) + 'px';
-
-      const cards = Array.from(container.querySelectorAll('.player')).filter(el=>el!==dragging && el!==placeholder);
-      for(const el of cards){
-        const r = el.getBoundingClientRect();
-        const center = r.top + scrollY + r.height/2;
-        if(y < center){
-          container.insertBefore(placeholder, el);
-          return;
-        }
-      }
-      container.appendChild(placeholder);
-    }
-
-    function onPointerUp(){
-      if(dragging){
-        container.insertBefore(dragging, placeholder);
-        dragging.classList.remove('dragging');
-        dragging.style.pointerEvents = '';
-        dragging.style.left = '';
-        dragging.style.top = '';
-        dragging = null;
-        if(placeholder && placeholder.parentNode){ placeholder.parentNode.removeChild(placeholder); }
-        placeholder = null;
-        if(typeof reindex === 'function') reindex();
-        if(typeof updateLeaderboard === 'function') updateLeaderboard();
-      }
-      document.removeEventListener('pointermove', onPointerMove);
-      document.removeEventListener('pointerup', onPointerUp);
-    }
-
-    container.addEventListener('pointerdown', onPointerDown);
+  function bindPlayerCard(card){
+    if(!card) return;
+    // bind +/- for core counters
+    card.querySelectorAll('.counter').forEach(function(row){
+      var input = row.querySelector('input');
+      if(!input) return;
+      var btns = row.querySelectorAll('button.pm');
+      if(btns[0]) btns[0].addEventListener('click', function(){ changeVal(input, -1, 2048); updateLeaderboard(); });
+      if(btns[1]) btns[1].addEventListener('click', function(){ changeVal(input, +1, 2048); updateLeaderboard(); });
+    });
   }
 
-  document.addEventListener('DOMContentLoaded', function(){
-    const container = document.getElementById('players-container');
-    if(container) enableLongPressDrag(container);
-  });
+  function bindExpansionToggle(){
+    var btn = document.getElementById('expansion-toggle');
+    if(!btn) return;
+    btn.addEventListener('click', function(){
+      window.expansionOn = !window.expansionOn;
+      btn.textContent = window.expansionOn ? 'ON' : 'OFF';
+      btn.classList.toggle('on', window.expansionOn);
+      btn.classList.toggle('off', !window.expansionOn);
+      document.querySelectorAll('.toolbar .expansion, .toolbar .exp-core').forEach(function(b){
+        b.classList.toggle('hidden', !window.expansionOn);
+      });
+      updateLeaderboard();
+    });
+  }
+
+  function updateLeaderboard(){
+    var board = document.getElementById('leaderboard');
+    var container = document.getElementById('players-container');
+    if(!board || !container) return;
+    var cards = Array.prototype.slice.call(container.querySelectorAll('.player'));
+    if(cards.length===0){
+      board.innerHTML = '<div class="lb-head"><div class="lb-title"><h3>🏆 Leaderboard</h3></div></div><div>No players</div>';
+      return;
+    }
+    var players = cards.map(function(card,i){
+      var name = (card.querySelector('input.player-name')?.value || ('Player '+(i+1))).trim();
+      var avatar = (card.querySelector('.avatar')?.textContent || '👤').trim();
+      var atp = parseInt(card.querySelector('input.atp')?.value) || 0;
+      var glu = parseInt(card.querySelector('input.glu')?.value) || 0;
+      var bg = (card.style.background && card.style.background.trim()) || '#ffffff';
+      return {name:name, avatar:avatar, atp:atp, glu:glu, bg:bg};
+    }).sort(function(a,b){ return (b.atp-a.atp) || (b.glu-a.glu); });
+
+    var champ = players[0];
+    function chip(bg){ return 'style="background:'+bg+';"'; }
+
+    board.innerHTML =
+      '<div class="lb-head">'+
+        '<div class="lb-title"><h3>🏆 Leaderboard</h3></div>'+
+        '<div class="toggle-wrap"><span>WTDGAP Expansion Pack</span><button id="expansion-toggle" class="toggle-btn '+(window.expansionOn?'on">ON':'off">OFF')+'</button></div>'+
+      '</div>'+
+      '<div class="champ-row">'+
+        '<div class="champ-left"><span class="chip-btn big" '+chip(champ.bg)+'>'+champ.avatar+' <b class="name-text">'+champ.name+'</b></span></div>'+
+        '<div class="champ-right">⚡ '+champ.atp+' &nbsp; | &nbsp; 🍞 '+champ.glu+'</div>'+
+      '</div>'+
+      '<hr class="lb-divider" />'+
+      players.map(function(p,i){
+        return '<div class="row">'+
+          '<div class="namecell">'+
+            '<span class="pill-btn" '+chip(p.bg)+'>'+(i+1)+'</span> '+
+            '<span class="chip-btn" '+chip(p.bg)+'>'+p.avatar+' <b class="name-text">'+p.name+'</b></span>'+
+          '</div>'+
+          '<div style="text-align:right;">ATP '+String(p.atp).padStart(3)+' | Glu '+String(p.glu).padStart(3)+'</div>'+
+          '<div>🏅</div>'+
+        '</div>';
+      }).join('');
+
+    bindExpansionToggle();
+  }
+
+  function init(){
+    // Bind the first existing player (if present)
+    var first = document.querySelector('#players-container .player');
+    if(first) bindPlayerCard(first);
+    updateLeaderboard();
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  // expose globally
+  window.updateLeaderboard = updateLeaderboard;
+  window.bindPlayerCard = bindPlayerCard;
+  window.bindExpansionToggle = bindExpansionToggle;
 })();
 </script>
 
 </body>
+<script>
+(function(){
+  function rnd(min, max){ return Math.floor(Math.random()*(max-min+1))+min; }
+  function randomPastel(){ var h=rnd(0,360), s=rnd(45,65), l=rnd(88,95); return "hsl("+h+" "+s+"% "+l+"%)"; }
+  function qs(id){ return document.getElementById(id); }
+  if (typeof window.isDay === "undefined") window.isDay = true;
+  if (typeof window.expansionOn === "undefined") window.expansionOn = true;
+  function bindCardExtras(card){
+    if(!card) return;
+    var avatarEl = card.querySelector('.avatar');
+    var avatars = ['👤','🐱','🐶','🐼','🦊','🐻','🦆','🐯','🐵','🐰','🐮','🐨','🧙','⚔️','🛡️'];
+    if(avatarEl){
+      avatarEl.addEventListener('click', function(){
+        var curr = avatarEl.textContent.trim();
+        var i = Math.max(0, avatars.indexOf(curr));
+        avatarEl.textContent = avatars[(i+1)%avatars.length];
+        window.updateLeaderboard && window.updateLeaderboard();
+      });
+    }
+    var paintBtn = card.querySelector('.paint-btn');
+    if(paintBtn){
+      var pressTimer=null, longPressed=false;
+      function clearTimer(){ if(pressTimer){ clearTimeout(pressTimer); pressTimer=null;} }
+      function start(){ longPressed=false; pressTimer=setTimeout(function(){ longPressed=true; card.style.background='#ffffff'; },600); }
+      function end(){ if(!longPressed){ card.style.background = randomPastel(); } clearTimer(); window.updateLeaderboard && window.updateLeaderboard(); }
+      paintBtn.addEventListener('mousedown', start);
+      paintBtn.addEventListener('mouseup', end);
+      paintBtn.addEventListener('mouseleave', clearTimer);
+      paintBtn.addEventListener('touchstart', start, {passive:true});
+      paintBtn.addEventListener('touchend', end);
+      paintBtn.addEventListener('touchcancel', clearTimer);
+    }
+    card.querySelectorAll('.counter').forEach(function(row){
+      var minus = row.querySelector('.pm:nth-of-type(1)');
+      var plus  = row.querySelector('.pm:nth-of-type(2)');
+      var input = row.querySelector('input.value-input') || row.querySelector('input');
+      if(minus && input) minus.addEventListener('click', function(){ var v=parseInt(input.value)||0; input.value=Math.max(0,v-1); window.updateLeaderboard && window.updateLeaderboard(); });
+      if(plus && input) plus.addEventListener('click', function(){ var v=parseInt(input.value)||0; input.value=Math.min(2048,v+1); window.updateLeaderboard && window.updateLeaderboard(); });
+    });
+    var del = card.querySelector('.reorder .icon-mini[title="Delete player"]');
+    if(del){
+      del.addEventListener('click', function(){ card.parentElement.removeChild(card); reindex(); window.updateLeaderboard && window.updateLeaderboard(); });
+    }
+  }
+  function createEmptyCard(){
+    var d = document.createElement('div');
+    d.className = 'player';
+    d.innerHTML = ''
+      + '<div class="player-header">'
+      +   '<div class="player-title">'
+      +     '<h2 class="avatar" title="Click to change avatar">👤</h2>'
+      +     '<input class="player-name" value="Player " />'
+      +   '</div>'
+      +   '<div class="reorder">'
+      +     '<button class="icon-mini paint-btn" title="Click: random color • Long press: reset to white">🎨</button>'
+      +     '<button class="icon-mini" title="Delete player">🗑️</button>'
+      +   '</div>'
+      + '</div>'
+      + '<div class="counter" data-core="1">'
+      +   '<span class="label">⚡ ATP</span>'
+      +   '<button class="pm">−</button>'
+      +   '<input class="value-input atp" max="999" min="0" type="number" value="20">'
+      +   '<button class="pm">+</button>'
+      + '</div>'
+      + '<div class="counter" data-core="1">'
+      +   '<span class="label">🍞 Glucose</span>'
+      +   '<button class="pm">−</button>'
+      +   '<input class="value-input glu" max="999" min="0" type="number" value="0">'
+      +   '<button class="pm">+</button>'
+      + '</div>'
+      + '<div class="toolbar"></div>'
+      + '<div class="section" data-type="mito"></div>'
+      + '<div class="section" data-type="cell"></div>'
+      + '<div class="section" data-type="infectA"></div>'
+      + '<div class="section" data-type="infectB"></div>'
+      + '<div class="section" data-type="immune"></div>'
+      + '<div class="section" data-type="overcast"></div>'
+      + '<div class="section" data-type="dry"></div>'
+      + '<div class="section" data-type="ice"></div>'
+      + '<div class="section" data-type="para"></div>'
+      + '<div class="section" data-type="coop"></div>';
+    return d;
+  }
+  function reindex(){
+    var container = qs('players-container');
+    if(!container) return;
+    Array.prototype.slice.call(container.querySelectorAll('.player')).forEach(function(c,i){
+      c.setAttribute('data-player', String(i+1));
+      var name = c.querySelector('input.player-name');
+      if(name && /^Player\s*\d*$/.test((name.value||'').trim())) name.value = 'Player ' + (i+1);
+    });
+    updateAddPlayerButton();
+  }
+  function updateAddPlayerButton(){
+    var container = qs('players-container'), btn = qs('add-player-btn');
+    if(!container || !btn) return;
+    var count = container.querySelectorAll('.player').length;
+    btn.disabled = count >= 6;
+  }
+  function addPlayer(){
+    var container = qs('players-container');
+    if(!container) return;
+    var count = container.querySelectorAll('.player').length;
+    if(count >= 6){ alert('Up to 6 players'); return; }
+    var card = createEmptyCard();
+    container.appendChild(card);
+    bindCardExtras(card);
+    reindex();
+    window.updateLeaderboard && window.updateLeaderboard();
+  }
+  function resetGame(){
+    var turn = qs('turn'); if(turn) turn.value = 1;
+    var day = qs('daynight'); if(day) day.textContent = '🌞 Day';
+    window.isDay = true;
+    var container = qs('players-container');
+    if(container){
+      Array.prototype.slice.call(container.querySelectorAll('.player')).forEach(function(card,i){
+        var atp = card.querySelector('input.atp'); if(atp) atp.value = 20;
+        var glu = card.querySelector('input.glu'); if(glu) glu.value = 0;
+        card.querySelectorAll('.section').forEach(function(sec){ sec.innerHTML=''; });
+        var name = card.querySelector('input.player-name');
+        if(name && /^Player\s*\d*$/.test((name.value||'').trim())) name.value = 'Player ' + (i+1);
+      });
+    }
+    reindex();
+    window.updateLeaderboard && window.updateLeaderboard();
+  }
+  function nextWrapper(){
+    if (typeof window.nextTurn === "function"){
+      window.nextTurn();
+    } else {
+      var turn = qs('turn'); if(turn) turn.value = (parseInt(turn.value)||1) + 1;
+      var day = qs('daynight');
+      if(day) day.textContent = window.isDay ? '🌙 Night' : '🌞 Day';
+      window.isDay = !window.isDay;
+    }
+    var audio = qs('click-sound'); if(audio){ try{ audio.currentTime=0; audio.play(); }catch(e){} }
+    window.updateLeaderboard && window.updateLeaderboard();
+  }
+  function switchWrapper(){
+    window.isDay = !window.isDay;
+    var day = qs('daynight'); if(day) day.textContent = window.isDay ? '🌞 Day' : '🌙 Night';
+  }
+  function wireControls(){
+    var addBtn = qs('add-player-btn'); if(addBtn){ addBtn.addEventListener('click', addPlayer); }
+    var resetBtn = qs('reset-btn'); if(resetBtn){ resetBtn.addEventListener('click', resetGame); }
+    var switchBtn = qs('switch-btn'); if(switchBtn){ switchBtn.addEventListener('click', switchWrapper); }
+    var nextBtn = qs('next-btn'); if(nextBtn){ nextBtn.addEventListener('click', nextWrapper); }
+  }
+  function initWiring(){
+    var first = document.querySelector('#players-container .player');
+    bindCardExtras(first);
+    wireControls();
+    reindex();
+    updateAddPlayerButton();
+    if (typeof window.updateLeaderboard === "function"){ window.updateLeaderboard(); }
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', initWiring);
+  } else {
+    initWiring();
+  }
+  window.addPlayer = addPlayer;
+  window.resetGame = resetGame;
+})();
+</script><script>
+(function(){
+  // === Toolbar builder ===
+  function buildToolbar(card){
+    var toolbar = card.querySelector('.toolbar');
+    if(!toolbar) return;
+    toolbar.innerHTML = "";
+    function makeBtn(label, emoji, sectionType, def, extraClass){
+      var b = document.createElement('button');
+      b.className = 'icon-btn ' + (extraClass||"");
+      b.textContent = emoji;
+      b.title = label;
+      b.setAttribute('aria-label', 'Add ' + label);
+      b.addEventListener('click', function(){
+        var sec = card.querySelector('.section[data-type="'+sectionType+'"]');
+        if(!sec) return;
+        var existing = sec.querySelectorAll('.counter').length;
+        if(existing >= 3) return;
+        var div = document.createElement('div');
+        div.className = 'counter';
+        div.innerHTML = '<span class="label">'+ (sectionType==='coop' ? '🤝 Cooperation' : (emoji+' '+label)) + '</span>'
+          + '<button class="pm minus">−</button>'
+          + '<input type="number" min="0" max="2048" value="'+def+'" class="value-input" inputmode="numeric" pattern="[0-9]*">'
+          + '<button class="pm plus">+</button>'
+          + '<button class="remove-btn" title="Delete">❌</button>';
+        sec.appendChild(div);
+        var minus = div.querySelector('button.minus');
+        var plus  = div.querySelector('button.plus');
+        var input = div.querySelector('input.value-input');
+        var del   = div.querySelector('button.remove-btn');
+        if(minus) minus.addEventListener('click', function(){ var v=parseInt(input.value)||0; input.value=Math.max(0,v-1); window.updateLeaderboard && window.updateLeaderboard(); });
+        if(plus)  plus.addEventListener('click', function(){ var v=parseInt(input.value)||0; input.value=Math.min(2048,v+1); window.updateLeaderboard && window.updateLeaderboard(); });
+        if(del)   del.addEventListener('click', function(){ div.remove(); window.updateLeaderboard && window.updateLeaderboard(); });
+      });
+      return b;
+    }
+    [
+      ['Mitosis','🧬','mito',5,''],
+      ['Cell','🔬','cell',1,''],
+      ['Acute','🦠','infectA',3,'exp-core'],
+      ['Chronic','☣︎','infectB',5,'exp-core'],
+      ['Immune','🛡️','immune',2,'exp-core'],
+      ['Overcast','☁️','overcast',2,'expansion'],
+      ['DrySeason','🔥','dry',2,'expansion'],
+      ['IceAge','🧊','ice',4,'expansion'],
+      ['Parasitism','👾','para',1,'expansion'],
+      ['Cooperation','🤝','coop',2,'expansion'],
+    ].forEach(function(args){ toolbar.appendChild(makeBtn.apply(null,args)); });
+
+    // Respect expansionOn visibility
+    var visible = (typeof window.expansionOn === 'undefined') ? true : window.expansionOn;
+    toolbar.querySelectorAll('.expansion, .exp-core').forEach(function(b){
+      b.classList.toggle('hidden', !visible);
+    });
+  }
+
+  // Hook into existing helpers if present
+  window.buildToolbar = window.buildToolbar || buildToolbar;
+
+  // Enhance our previous createEmptyCard if it exists, else replace local reference
+  var _createEmptyCard = (typeof window.createEmptyCard === 'function') ? window.createEmptyCard : null;
+
+  function createEmptyCardWithToolbar(){
+    var card = _createEmptyCard ? _createEmptyCard() : (function(){
+      var d = document.createElement('div');
+      d.className = 'player';
+      d.innerHTML = ''
+        + '<div class="player-header">'
+        +   '<div class="player-title">'
+        +     '<h2 class="avatar" title="Click to change avatar">👤</h2>'
+        +     '<input class="player-name" value="Player " />'
+        +   '</div>'
+        +   '<div class="reorder">'
+        +     '<button class="icon-mini paint-btn" title="Click: random color • Long press: reset to white">🎨</button>'
+        +     '<button class="icon-mini" title="Delete player">🗑️</button>'
+        +   '</div>'
+        + '</div>'
+        + '<div class="counter" data-core="1">'
+        +   '<span class="label">⚡ ATP</span>'
+        +   '<button class="pm">−</button>'
+        +   '<input class="value-input atp" max="999" min="0" type="number" value="20">'
+        +   '<button class="pm">+</button>'
+        + '</div>'
+        + '<div class="counter" data-core="1">'
+        +   '<span class="label">🍞 Glucose</span>'
+        +   '<button class="pm">−</button>'
+        +   '<input class="value-input glu" max="999" min="0" type="number" value="0">'
+        +   '<button class="pm">+</button>'
+        + '</div>'
+        + '<div class="toolbar"></div>'
+        + '<div class="section" data-type="mito"></div>'
+        + '<div class="section" data-type="cell"></div>'
+        + '<div class="section" data-type="infectA"></div>'
+        + '<div class="section" data-type="infectB"></div>'
+        + '<div class="section" data-type="immune"></div>'
+        + '<div class="section" data-type="overcast"></div>'
+        + '<div class="section" data-type="dry"></div>'
+        + '<div class="section" data-type="ice"></div>'
+        + '<div class="section" data-type="para"></div>'
+        + '<div class="section" data-type="coop"></div>';
+      return d;
+    })();
+    // ensure toolbar exists
+    buildToolbar(card);
+    // also re-bind extras from earlier patch if available
+    if (typeof window.bindCardExtras === 'function') window.bindCardExtras(card);
+    return card;
+  }
+  window.createEmptyCard = createEmptyCardWithToolbar;
+
+  // === Long-press drag reorder ===
+  function enableLongPressDrag(container){
+    if(!container) return;
+    let dragging=null, placeholder=null;
+    let startY=0, startTop=0, startRect=null;
+    let pressTimer=null, holdMs=900;
+    let downScrollY=0, startClientY=0;
+    const moveThreshold=28;
+
+    function startDrag(card){
+      const scrollY = window.scrollY || window.pageYOffset;
+      startRect = card.getBoundingClientRect();
+      placeholder = document.createElement('div');
+      placeholder.className = 'player placeholder';
+      placeholder.style.height = startRect.height + 'px';
+      container.insertBefore(placeholder, card.nextSibling);
+      card.classList.add('dragging');
+      card.style.position='absolute';
+      card.style.width = '420px';
+      card.style.maxWidth = '420px';
+      card.style.left = (startRect.left)+'px';
+      card.style.top  = (startRect.top + scrollY)+'px';
+      card.style.pointerEvents='none';
+      dragging = card;
+      startY = startClientY + scrollY;
+      startTop = startRect.top + scrollY;
+      try{ navigator.vibrate && navigator.vibrate(30); }catch(e){}
+      document.addEventListener('pointermove', onMove, {passive:true});
+      document.addEventListener('pointerup', onUp, {once:true});
+    }
+    function onMove(e){
+      if(!dragging) return;
+      const scrollY = window.scrollY || window.pageYOffset;
+      const y = e.clientY + scrollY;
+      const dy = y - startY;
+      dragging.style.top = (startTop + dy) + 'px';
+      const cards = Array.from(container.querySelectorAll('.player')).filter(el=>el!==dragging && el!==placeholder);
+      for(const el of cards){
+        const r = el.getBoundingClientRect();
+        const center = r.top + scrollY + r.height/2;
+        if(y < center){ container.insertBefore(placeholder, el); return; }
+      }
+      container.appendChild(placeholder);
+    }
+    function onUp(){
+      if(dragging){
+        container.insertBefore(dragging, placeholder);
+        dragging.classList.remove('dragging');
+        dragging.style.position='';
+        dragging.style.pointerEvents='';
+        dragging.style.left=''; dragging.style.top=''; dragging.style.width=''; dragging.style.maxWidth='';
+        dragging=null;
+        placeholder && placeholder.remove();
+        placeholder=null;
+        if (typeof window.updateLeaderboard==='function') window.updateLeaderboard();
+      }
+      document.removeEventListener('pointermove', onMove);
+      document.removeEventListener('pointerup', onUp);
+    }
+    function onDown(e){
+      const card = e.target.closest('.player');
+      if(!card || !container.contains(card)) return;
+      // ignore interactive controls
+      if(e.target.closest('button, input, select, textarea, a, .icon-btn, .pm, .paint-btn, .toolbar, .reorder, .value-input')) return;
+      startClientY = e.clientY;
+      downScrollY = (window.scrollY || window.pageYOffset);
+      pressTimer = setTimeout(function(){
+        const moved = Math.abs((window.scrollY||window.pageYOffset) - downScrollY) > moveThreshold;
+        if(!moved){ startDrag(card); e.preventDefault(); }
+      }, holdMs);
+      function cancelMove(ev){
+        const dy = Math.abs(ev.clientY - startClientY);
+        if(dy > moveThreshold){ clearTimeout(pressTimer); container.removeEventListener('pointermove', cancelMove); container.removeEventListener('pointerup', cancelHold); }
+      }
+      function cancelHold(){
+        clearTimeout(pressTimer); container.removeEventListener('pointermove', cancelMove); container.removeEventListener('pointerup', cancelHold);
+      }
+      container.addEventListener('pointermove', cancelMove, {passive:true});
+      container.addEventListener('pointerup', cancelHold, {once:true});
+    }
+    container.addEventListener('pointerdown', onDown);
+    container.style.touchAction = 'manipulation';
+  }
+  window.enableLongPressDrag = window.enableLongPressDrag || enableLongPressDrag;
+
+  // === Auto-init for existing cards and container ===
+  function initToolbarAndDrag(){
+    document.querySelectorAll('#players-container .player').forEach(function(card){
+      try{ buildToolbar(card); }catch(e){}
+    });
+    var container = document.getElementById('players-container');
+    enableLongPressDrag(container);
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', initToolbarAndDrag);
+  } else {
+    initToolbarAndDrag();
+  }
+})();
+</script><script>
+(function(){
+  if (typeof window.addPlayer === 'function'){
+    var _origAdd = window.addPlayer;
+    window.addPlayer = function(){
+      var container = document.getElementById('players-container');
+      _origAdd();
+      try{
+        if(container){
+          var cards = container.querySelectorAll('.player');
+          var card = cards[cards.length-1];
+          if(card){
+            if (typeof window.buildToolbar === 'function') window.buildToolbar(card);
+            if (typeof window.bindCardExtras === 'function') window.bindCardExtras(card);
+          }
+        }
+      }catch(e){ console.error(e); }
+      if (typeof window.updateLeaderboard === 'function') window.updateLeaderboard();
+    };
+  }
+})();
+</script><script>
+(function(){
+  function safelyBuildAll(){
+    try {
+      document.querySelectorAll('#players-container .player').forEach(function(card){
+        if (typeof window.buildToolbar === 'function') window.buildToolbar(card);
+      });
+    } catch(e){ console.error(e); }
+  }
+  // run at load for existing
+  if (document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', safelyBuildAll);
+  } else {
+    safelyBuildAll();
+  }
+  // wrap addPlayer
+  if (typeof window.addPlayer === 'function'){
+    var _orig = window.addPlayer;
+    window.addPlayer = function(){
+      var container = document.getElementById('players-container');
+      _orig();
+      try{
+        var cards = container ? container.querySelectorAll('.player') : [];
+        var card = cards.length ? cards[cards.length-1] : null;
+        if(card && typeof window.buildToolbar === 'function') window.buildToolbar(card);
+      }catch(e){ console.error(e); }
+    };
+  }
+})();
+</script>
+<script>
+(function(){
+  // Ensure buildToolbar exists (fallback no-op to avoid errors)
+  if (typeof window.buildToolbar !== 'function') {
+    window.buildToolbar = function(card){
+      var toolbar = card && card.querySelector('.toolbar');
+      if (!toolbar) return;
+      toolbar.innerHTML = "";
+      function makeBtn(label, emoji, sectionType, def, extraClass){
+        var b = document.createElement('button');
+        b.className = 'icon-btn ' + (extraClass||"");
+        b.textContent = emoji;
+        b.title = label;
+        b.setAttribute('aria-label', 'Add ' + label);
+        b.addEventListener('click', function(){
+          var sec = card.querySelector('.section[data-type="'+sectionType+'"]');
+          if(!sec) return;
+          var existing = sec.querySelectorAll('.counter').length;
+          if(existing >= 3) return;
+          var div = document.createElement('div');
+          div.className = 'counter';
+          div.innerHTML = '<span class="label>'+ (sectionType==='coop' ? '">🤝 Cooperation' : '">'+emoji+' '+label) + '</span>'
+            + '<button class="pm minus">−</button>'
+            + '<input type="number" min="0" max="2048" value="'+def+'" class="value-input" inputmode="numeric" pattern="[0-9]*">'
+            + '<button class="pm plus">+</button>'
+            + '<button class="remove-btn" title="Delete">❌</button>';
+          sec.appendChild(div);
+          var minus = div.querySelector('button.minus');
+          var plus  = div.querySelector('button.plus');
+          var input = div.querySelector('input.value-input');
+          var del   = div.querySelector('button.remove-btn');
+          if(minus) minus.addEventListener('click', function(){ var v=parseInt(input.value)||0; input.value=Math.max(0,v-1); window.updateLeaderboard && window.updateLeaderboard(); });
+          if(plus)  plus.addEventListener('click', function(){ var v=parseInt(input.value)||0; input.value=Math.min(2048,v+1); window.updateLeaderboard && window.updateLeaderboard(); });
+          if(del)   del.addEventListener('click', function(){ div.remove(); window.updateLeaderboard && window.updateLeaderboard(); });
+        });
+        return b;
+      }
+      [
+        ['Mitosis','🧬','mito',5,''],
+        ['Cell','🔬','cell',1,''],
+        ['Acute','🦠','infectA',3,'exp-core'],
+        ['Chronic','☣︎','infectB',5,'exp-core'],
+        ['Immune','🛡️','immune',2,'exp-core'],
+        ['Overcast','☁️','overcast',2,'expansion'],
+        ['DrySeason','🔥','dry',2,'expansion'],
+        ['IceAge','🧊','ice',4,'expansion'],
+        ['Parasitism','👾','para',1,'expansion'],
+        ['Cooperation','🤝','coop',2,'expansion'],
+      ].forEach(function(args){ toolbar.appendChild(makeBtn.apply(null,args)); });
+
+      // Respect expansion toggle
+      var visible = (typeof window.expansionOn === 'undefined') ? true : window.expansionOn;
+      toolbar.querySelectorAll('.expansion, .exp-core').forEach(function(b){
+        b.classList.toggle('hidden', !visible);
+      });
+    };
+  }
+
+  function ensureToolbar(card){
+    if(!card) return;
+    var toolbar = card.querySelector('.toolbar');
+    if(!toolbar) return;
+    // If toolbar is empty or missing our first emoji, rebuild
+    if (!toolbar.querySelector('.icon-btn') || toolbar.textContent.indexOf('🧬') === -1) {
+      try { window.buildToolbar(card); } catch(e) { console.error(e); }
+    }
+    // Also (re)bind extras if provided by earlier patches
+    if (typeof window.bindCardExtras === 'function') {
+      try { window.bindCardExtras(card); } catch(e){ console.error(e); }
+    }
+  }
+
+  function scanAll(){
+    document.querySelectorAll('#players-container .player').forEach(ensureToolbar);
+  }
+
+  // Run once at load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', scanAll);
+  } else {
+    scanAll();
+  }
+
+  // Observe future additions
+  var cont = document.getElementById('players-container');
+  if (cont && typeof MutationObserver !== 'undefined') {
+    var mo = new MutationObserver(function(muts){
+      muts.forEach(function(m){
+        m.addedNodes && m.addedNodes.forEach(function(n){
+          if (n.nodeType === 1 && n.classList && n.classList.contains('player')) {
+            ensureToolbar(n);
+          } else if (n.nodeType === 1) {
+            // if a wrapper was inserted, scan inside
+            var cards = n.querySelectorAll ? n.querySelectorAll('.player') : [];
+            cards && cards.forEach(ensureToolbar);
+          }
+        });
+      });
+    });
+    mo.observe(cont, {childList: true, subtree: true});
+  }
+
+  // Also hook the Add Player button to rebuild after click (double safety)
+  var addBtn = document.getElementById('add-player-btn');
+  if (addBtn) {
+    addBtn.addEventListener('click', function(){
+      setTimeout(scanAll, 0);
+      setTimeout(scanAll, 60);
+    });
+  }
+})();
+</script>
 </html>
