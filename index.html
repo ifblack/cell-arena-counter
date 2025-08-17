@@ -129,7 +129,7 @@ function resetGame() {
     document.getElementById('atp' + i).value = 20;
     document.getElementById('glu' + i).value = 0;
 
-    const sections = ['mito', 'cell', 'infectA', 'infectB', 'immune'];
+    const sections = ['mito', 'cell', 'infectA', 'infectB', 'immune','overcast','dry','ice','para','coop'];
     sections.forEach(sec => {
       const container = document.getElementById(sec + '-container-' + i);
       if (container) container.innerHTML = '';
