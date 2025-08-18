@@ -311,7 +311,15 @@
 html.scroll-locked, body.scroll-locked { overflow: hidden !important; touch-action: none; overscroll-behavior: contain; }
 </style>
 
-<style>.player.dragging{position:absolute !important;width:min(92vw, 420px) !important;transform:scale(1.01);box-shadow:0 14px 30px rgba(16,24,40,.28) !important;cursor:grabbing !important;z-index:1000;touch-action:none !important;}</style><style>.scroll-locked{overflow:hidden!important;touch-action:none!important;}</style><style>.player, .player *{-webkit-user-select:none;user-select:none}.player.dragging{-webkit-touch-callout:none}</style><style>@media (max-width: 400px){#leaderboard .row{display:flex;align-items:center;justify-content:space-between;gap:6px;white-space:nowrap;padding:2px 4px;}#leaderboard .row .namecell{flex:1 1 auto;min-width:0;overflow:hidden;}#leaderboard .row .name-text{display:inline-block;max-width:64vw;overflow:hidden;text-overflow:ellipsis;vertical-align:bottom;}#leaderboard .row .stats{flex:0 0 auto;text-align:right;font-size:12px;line-height:1;max-width:32vw;white-space:nowrap;}#leaderboard .row>:last-child{flex:0 0 auto;}.icon-mini.drag-handle{cursor:grab;touch-action:none;}.icon-mini.drag-handle:active{cursor:grabbing;}}</style></head>
+<style>.player.dragging{position:absolute !important;width:min(92vw, 420px) !important;transform:scale(1.01);box-shadow:0 14px 30px rgba(16,24,40,.28) !important;cursor:grabbing !important;z-index:1000;touch-action:none !important;}</style><style>.scroll-locked{overflow:hidden!important;touch-action:none!important;}</style><style>.player, .player *{-webkit-user-select:none;user-select:none}.player.dragging{-webkit-touch-callout:none}</style><style>@media (max-width: 400px){#leaderboard .row{display:flex;align-items:center;justify-content:space-between;gap:6px;white-space:nowrap;padding:2px 4px;}#leaderboard .row .namecell{flex:1 1 auto;min-width:0;overflow:hidden;}#leaderboard .row .name-text{display:inline-block;max-width:64vw;overflow:hidden;text-overflow:ellipsis;vertical-align:bottom;}#leaderboard .row .stats{flex:0 0 auto;text-align:right;font-size:12px;line-height:1;max-width:32vw;white-space:nowrap;}#leaderboard .row>:last-child{flex:0 0 auto;}.icon-mini.drag-handle{cursor:grab;touch-action:none;}.icon-mini.drag-handle:active{cursor:grabbing;}}</style>
+<script>
+(function(){
+  document.documentElement.classList.remove('scroll-locked');
+  document.body.classList.remove('scroll-locked');
+})();
+</script>
+
+</head>
 
 <body style="max-width: 1250px; margin: 0 auto;">
   <!-- 顶部导航区域 -->
@@ -882,6 +890,135 @@ if(e && e.preventDefault) e.preventDefault();
     try{ updateAddPlayerButton(); }catch(e){}
   });
   mo.observe(container, { childList: true, subtree: true });
+})();
+</script>
+
+
+<!-- Mobile Drag Fix v3: handle-only, scroll-safe, with full cleanup -->
+<style>
+  /* Ensure handle and dragging element do not hand off gestures to browser */
+  .icon-mini.drag-handle{ touch-action: none !important; cursor: grab; }
+  .icon-mini.drag-handle:active{ cursor: grabbing; }
+  .player.dragging{ touch-action: none !important; }
+  html.scroll-locked, body.scroll-locked { overflow: hidden !important; overscroll-behavior: contain; touch-action: none !important; }
+</style>
+<script>
+(function(){
+  if (window.__DragFixV3Applied__) return;
+  window.__DragFixV3Applied__ = true;
+
+  function lockScroll(lock){
+    try{
+      document.documentElement.classList.toggle('scroll-locked', lock);
+      document.body.classList.toggle('scroll-locked', lock);
+    }catch(e){}
+  }
+  function unlockScroll(){ lockScroll(false); }
+
+  // Always unlock scroll on critical lifecycle events
+  ['pointerup','touchend','touchcancel','blur','pageshow'].forEach(function(ev){
+    window.addEventListener(ev, unlockScroll, {passive:true});
+  });
+  document.addEventListener('visibilitychange', function(){ if(document.hidden) unlockScroll(); });
+
+  var container = document.getElementById('players-container');
+  if(!container) return;
+
+  // Disable legacy long-press reorder by swallowing its pointerdown on non-handle areas
+  container.addEventListener('pointerdown', function(e){
+    var isHandle = !!e.target.closest('.drag-handle');
+    if(!isHandle){
+      // Stop any previously attached long-press handlers
+      e.stopImmediatePropagation();
+    }
+  }, true);
+
+  // Robust handle-only drag
+  var dragging=null, placeholder=null, startY=0, startTop=0, startRect=null, pointerId=null;
+
+  function startDrag(card, e){
+    pointerId = e.pointerId;
+    var scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    var scrollX = window.scrollX || document.documentElement.scrollLeft || 0;
+    startRect = card.getBoundingClientRect();
+
+    // placeholder
+    placeholder = document.createElement('div');
+    placeholder.className = 'player placeholder';
+    placeholder.style.height = startRect.height + 'px';
+    card.parentElement.insertBefore(placeholder, card.nextSibling);
+
+    // elevate card
+    card.classList.add('dragging');
+    var w = card.offsetWidth;
+    Object.assign(card.style, {
+      position:'absolute', width: w + 'px',
+      left: (startRect.left + scrollX) + 'px',
+      top:  (startRect.top  + scrollY) + 'px',
+      pointerEvents: 'auto'
+    });
+
+    try{ e.target.setPointerCapture && e.target.setPointerCapture(pointerId);}catch(_){}
+    dragging = card;
+    startY    = e.clientY + scrollY;
+    startTop  = startRect.top + scrollY;
+
+    lockScroll(true);
+    document.addEventListener('pointermove', onMove, {passive:false});
+    document.addEventListener('pointerup', onUp, {once:true});
+    document.addEventListener('pointercancel', onUp, {once:true});
+  }
+
+  function onMove(e){
+    if(!dragging) return;
+    if(pointerId!=null && e.pointerId!==pointerId) return;
+    e.preventDefault(); // stop page scroll
+
+    // Edge auto-scroll
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    var edge = 56;
+    if(e.clientY < edge) window.scrollBy(0, -14);
+    else if(e.clientY > vh - edge) window.scrollBy(0, 14);
+
+    var y  = e.clientY + (window.scrollY || document.documentElement.scrollTop || 0);
+    dragging.style.top = (startTop + (y - startY)) + 'px';
+
+    // Reorder
+    var parent = placeholder.parentElement;
+    var cards = Array.prototype.slice.call(parent.querySelectorAll('.player')).filter(function(el){ return el!==dragging && el!==placeholder; });
+    for(var i=0;i<cards.length;i++){
+      var r = cards[i].getBoundingClientRect();
+      var mid = r.top + (window.scrollY || document.documentElement.scrollTop || 0) + r.height/2;
+      if(y < mid){ parent.insertBefore(placeholder, cards[i]); return; }
+    }
+    parent.appendChild(placeholder);
+  }
+
+  function onUp(){
+    try{
+      if(dragging){
+        var parent = placeholder && placeholder.parentElement;
+        if(parent) parent.insertBefore(dragging, placeholder);
+        dragging.classList.remove('dragging');
+        ['position','width','left','top','pointerEvents'].forEach(function(k){ dragging.style[k]=''; });
+      }
+      if(placeholder) placeholder.remove();
+    }finally{
+      dragging=null; placeholder=null; pointerId=null;
+      document.removeEventListener('pointermove', onMove);
+      unlockScroll();
+      try{ if(typeof window.updateLeaderboard==='function') window.updateLeaderboard(); }catch(e){}
+    }
+  }
+
+  container.addEventListener('pointerdown', function(e){
+    var handle = e.target.closest('.drag-handle');
+    if(!handle) return;
+    var card = handle.closest('.player');
+    if(!card) return;
+    e.preventDefault();
+    startDrag(card, e);
+  });
 })();
 </script>
 
